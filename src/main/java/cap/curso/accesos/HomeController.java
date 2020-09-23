@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package sample.jsp;
+package cap.curso.accesos;
 
 import java.util.Map;
 
