@@ -1,5 +1,7 @@
 package cap.curso.accesos.estado.servicios;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,13 @@ public class EstadosService implements EstadosServiceInterface
 	public Estado findByDescripcion(String descripcion)
 	{
 		return getEstadosRepository().findByDescripcion(descripcion);
+	}
+
+	@Override
+	public List<Estado> getEstados()
+	{
+		// TODO Auto-generated method stub
+		return (List<Estado>) getEstadosRepository().findAll();
 	}
 
 }

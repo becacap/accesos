@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cap.curso.accesos;
+package cap.curso.accesos.controladores;
 
 import java.util.Map;
 
