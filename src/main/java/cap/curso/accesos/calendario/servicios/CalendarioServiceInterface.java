@@ -21,4 +21,6 @@ public interface CalendarioServiceInterface
 
 	public Calendario updateCalendarioEstado(Integer idCalendario, Estado estado) throws CalendarioNotFoundException;
 
+	public Iterable<Calendario> findByAnyo(Integer anyo) throws CalendarioNotFoundException;
+	
 }

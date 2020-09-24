@@ -136,4 +136,17 @@ public class CalendarioService implements CalendarioServiceInterface
 		}
 	}
 
+	public Iterable<Calendario> findByAnyo(Integer anyo) throws CalendarioNotFoundException
+	{
+		Iterable<Calendario> diasAnyo = getCalendarioRepository().findByAnyo(anyo.toString());
+
+		Iterator<Calendario> it = diasAnyo.iterator();
+		if (!it.hasNext()) // si la lista de dias no esta vacia, no se genera calendario
+		{
+			throw new CalendarioNotFoundException("El calendario no existe en la bd");
+		}
+
+		return diasAnyo;
+	}
+
 }
