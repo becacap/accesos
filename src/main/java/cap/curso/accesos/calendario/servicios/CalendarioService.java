@@ -72,13 +72,21 @@ public class CalendarioService implements CalendarioServiceInterface
 	{
 		Iterable<Calendario> diasAnyo = getCalendarioRepository().findByAnyo(anyo.toString());
 
+		// System.out.println("-----> HE BUSCADO POR AÑO");
+
 		Iterator<Calendario> it = diasAnyo.iterator();
 		if (it.hasNext()) // si la lista de dias no esta vacia, no se genera calendario
 		{
 			throw new CalendarioAlreadyExistsException("El calendario ya existe en la bd");
 		}
+
+		// System.out.println("-----> HE ENCONTRADO POR AÑO");
+
 		Estado laborable = getEstadosRepository().findByDescripcion("Laborable");
 		Estado festivo = getEstadosRepository().findByDescripcion("Festivo");
+
+		// System.out.println("-----> HE BUSCADO LOS ESTADOS");
+
 		if (laborable == null)
 		{
 			throw new EstadoNotFoundException("El estado Laborable no existe");
@@ -86,6 +94,8 @@ public class CalendarioService implements CalendarioServiceInterface
 		{
 			throw new EstadoNotFoundException("El estado Festivo no existe");
 		}
+
+		// System.out.println("-----> HE ENCONTRADO LOS ESTADOS");
 
 		List<Calendario> listaDiasAnyo = new ArrayList<Calendario>();
 		GregorianCalendar calendario = new GregorianCalendar(anyo, 0, 1); // instanciamos el año
@@ -110,6 +120,9 @@ public class CalendarioService implements CalendarioServiceInterface
 			}
 
 			Calendario insertado = getCalendarioRepository().save(fila);
+
+			// System.out.println("-----> HE INSERTADO EL DIA");
+
 			listaDiasAnyo.add(insertado);
 
 			calendario.add(Calendar.DAY_OF_YEAR, 1); // avanzamos al dia siguiente

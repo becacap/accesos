@@ -11,10 +11,9 @@ import cap.curso.accesos.entidades.Calendario;
 public interface CalendarioRepository extends CrudRepository<Calendario, Integer>
 {
 
-	@Query("from Calendario c where SubString(cast(c.fecha as text),1,4) = :anyo")
+	@Query(value = "select * from calendarios c where extract(YEAR from c.fecha) = :anyo", nativeQuery = true)
 	public Iterable<Calendario> findByAnyo(@Param("anyo") String anyo);
 
-	// @Query(value =
-	// "select * from calendarios c where extract(YEAR from c.fecha) = :anyo",
-	// nativeQuery = true)
+	// "from Calendario c where SubString(cast(c.fecha as text),1,4) = :anyo"
+	// "select * from calendarios c where extract(YEAR from c.fecha) = :anyo"
 }
