@@ -89,6 +89,29 @@ public class RestAccesosController
 		return empleado;
 	}
 
+	@PostMapping("/empleados/modificar")
+	public Empleado modificarEmpleado(@RequestBody Empleado empleado)
+	{
+		if(empleado.getJornada().getId()==0) {
+			empleado.setJornada(getjPAJornadaServiceInterface().save(empleado.getJornada()));
+		}
+		getJpaEmpleadoSI().save(empleado);
+		
+		return empleado;
+	}
+	@GetMapping("/empleados")
+	public List<Empleado> getAllEmpleados()
+	{
+		List<Empleado> empleados = new ArrayList<Empleado>();
+		empleados = (ArrayList<Empleado>) getJpaEmpleadoSI().findAll();
+		return empleados;
+	}
+	
+	@GetMapping("/empleados/{id}")
+	public Optional<Empleado> getEmpleado(@PathVariable int id)
+	{
+		return getJpaEmpleadoSI().findById(id);
+	}
 	public JPAJornadaServiceInterface getJornadaServiceInterface()
 	{
 		return jPAJornadaServiceInterface;
