@@ -1,6 +1,5 @@
 package cap.curso.accesos.controladores;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,8 +12,7 @@ import cap.curso.accesos.entidades.Empleado;
 import cap.curso.accesos.entidades.Estado;
 import cap.curso.accesos.entidades.Jornada;
 import cap.curso.accesos.estado.servicios.EstadosServiceInterface;
-
-
+import cap.curso.accesos.servicios.JPAJornadaServiceInterface;
 
 @RestController
 @RequestMapping("/api")
@@ -22,32 +20,28 @@ public class RestAccesosController
 {
 	@Autowired
 	private EstadosServiceInterface estadosServiceInterface;
-	
+
 	@Autowired
-	private cap.curso.accesos.servicios.JPAJornadaServiceInterface jpaJornadaSI;
-	
+	private JPAJornadaServiceInterface jPAJornadaServiceInterface;
+
 	@Autowired
 	private cap.curso.accesos.servicios.JPAEmpleadoServiceInterface jpaEmpleadoSI;
-	
+
 	@GetMapping("/ejemplo")
-	public Estado home(@RequestParam("descripcion") String descripcion) {
+	public Estado home(@RequestParam("descripcion") String descripcion)
+	{
 		return getEstadosServiceInterface().findByDescripcion(descripcion);
 	}
-	
+
 	@PostMapping("/modificarJornada")
-	public java.util.Optional<Empleado> modificarJornada(@RequestBody("empleado") java.util.Optional<Empleado> empleado, Jornada jornada) {
-		Jornada jornadaNueva = new Jornada();
-		jornadaNueva.setLunes("9.00-20.00");
-		jornadaNueva.setMartes("9.00-20.00");
-		jornadaNueva.setMiercoles("9.00-20.00");
-		jornadaNueva.setJueves("9.00-20.00");
-		jornadaNueva.setViernes("9.00-20.00");
-		jornadaNueva.setDescripcion("Jornada completa");
-		jpaJornadaSI.save(jornadaNueva);
-		
-		empleado.get().setJornada(jornadaNueva);
+	public Empleado modificarJornada(@RequestBody Empleado empleado)
+	{
+
+		empleado.setJornada(getjPAJornadaServiceInterface().save(empleado.getJornada()));
+		getJpaEmpleadoSI().save(empleado);
 		return empleado;
 	}
+
 	public EstadosServiceInterface getEstadosServiceInterface()
 	{
 		return estadosServiceInterface;
@@ -56,5 +50,25 @@ public class RestAccesosController
 	public void setEstadosServiceInterface(EstadosServiceInterface estadosServiceInterface)
 	{
 		this.estadosServiceInterface = estadosServiceInterface;
+	}
+
+	public cap.curso.accesos.servicios.JPAEmpleadoServiceInterface getJpaEmpleadoSI()
+	{
+		return jpaEmpleadoSI;
+	}
+
+	public void setJpaEmpleadoSI(cap.curso.accesos.servicios.JPAEmpleadoServiceInterface jpaEmpleadoSI)
+	{
+		this.jpaEmpleadoSI = jpaEmpleadoSI;
+	}
+
+	public JPAJornadaServiceInterface getjPAJornadaServiceInterface()
+	{
+		return jPAJornadaServiceInterface;
+	}
+
+	public void setjPAJornadaServiceInterface(JPAJornadaServiceInterface jPAJornadaServiceInterface)
+	{
+		this.jPAJornadaServiceInterface = jPAJornadaServiceInterface;
 	}
 }
