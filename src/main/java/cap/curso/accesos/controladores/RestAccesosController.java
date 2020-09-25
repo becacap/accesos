@@ -40,7 +40,7 @@ public class RestAccesosController
 		return getEstadosServiceInterface().findByDescripcion(descripcion);
 	}
 	
-	@PostMapping("/add-jornada")
+	@GetMapping("/add-jornada")
 	public Jornada introducirJornada() {
 		Jornada jornada = new Jornada();
 		jornada.setDescripcion("Jornada Completa");
@@ -54,11 +54,11 @@ public class RestAccesosController
 		return getJornadaServiceInterface().save(jornada);
 	}
 	
-	@GetMapping("/find-jornadas")
+	@GetMapping("/find-all-jornadas")
 	public List<Jornada> getAllJornadas()
 	{
 		List<Jornada> jornadas = new ArrayList<Jornada>();
-		jornadas = (List<Jornada>) getJornadaServiceInterface().findAll();
+		jornadas = (ArrayList<Jornada>) getJornadaServiceInterface().findAll();
 		return jornadas;
 	}
 	
