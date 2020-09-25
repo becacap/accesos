@@ -65,7 +65,7 @@ public class RestAccesosController
 		}
 	}
 	
-	@GetMapping("/find-all-jornadas")
+	@GetMapping("/jornada")
 	public List<Jornada> getAllJornadas()
 	{
 		List<Jornada> jornadas = new ArrayList<Jornada>();
