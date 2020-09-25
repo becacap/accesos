@@ -1,13 +1,5 @@
 package cap.curso.accesos;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.sql.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
