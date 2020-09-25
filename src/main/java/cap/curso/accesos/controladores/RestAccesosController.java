@@ -14,6 +14,7 @@ import cap.curso.accesos.entidades.Jornada;
 import cap.curso.accesos.estado.servicios.EstadosServiceInterface;
 import cap.curso.accesos.servicios.JPAJornadaServiceInterface;
 
+
 @RestController
 @RequestMapping("/api")
 public class RestAccesosController
@@ -34,10 +35,11 @@ public class RestAccesosController
 	}
 
 	@PostMapping("/modificarJornada")
-	public Empleado modificarJornada(@RequestBody Empleado empleado)
+	public Empleado modificarJornada(@RequestBody Empleado empleado) 
 	{
-
+		if(empleado.getJornada().getId() == 0) {
 		empleado.setJornada(getjPAJornadaServiceInterface().save(empleado.getJornada()));
+		}
 		getJpaEmpleadoSI().save(empleado);
 		return empleado;
 	}
