@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import cap.curso.accesos.calendario.DTOs.AnyoRequestDto;
 import cap.curso.accesos.calendario.exception.CalendarioAlreadyExistsException;
 import cap.curso.accesos.calendario.exception.CalendarioNotFoundException;
 import cap.curso.accesos.calendario.servicios.CalendarioService;
@@ -36,7 +36,7 @@ public class CalendarioRestController
 		this.calendarioService = calendarioService;
 	}
 
-	@GetMapping("/all")
+	@GetMapping("")
 	public Iterable<Calendario> findAll()
 	{
 		return getCalendarioService().findAll();
@@ -55,11 +55,11 @@ public class CalendarioRestController
 	}
 
 	@PostMapping("/generar")
-	public Iterable<Calendario> generaCalendario(@RequestBody(required = true) AnyoRequest anyo)
+	public Iterable<Calendario> generaCalendario(@RequestBody(required = true) AnyoRequestDto anyo)
 	{
 		try
 		{
-			return getCalendarioService().generaCalendarioAnyo(Integer.parseInt(anyo.getAnyo()));
+			return getCalendarioService().generaCalendarioAnyo(anyo.getAnyo());
 		} catch (CalendarioAlreadyExistsException | EstadoNotFoundException e)
 		{
 			return new ArrayList<Calendario>();
@@ -83,22 +83,6 @@ public class CalendarioRestController
 	public Calendario getCalendario(@PathVariable("id") Integer idCalendario)
 	{
 		return getCalendarioService().findById(idCalendario);
-	}
-
-	private class AnyoRequest
-	{
-
-		private String anyo;
-
-		public String getAnyo()
-		{
-			return anyo;
-		}
-
-		public void setAnyo(String anyo)
-		{
-			this.anyo = anyo;
-		}
 	}
 
 }
