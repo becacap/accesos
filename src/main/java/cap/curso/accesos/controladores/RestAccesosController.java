@@ -3,6 +3,8 @@ package cap.curso.accesos.controladores;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,13 +55,18 @@ public class RestAccesosController
 	}
 	
 	@GetMapping("/find-jornadas")
-	public Jornada getAllJornadas()
+	public List<Jornada> getAllJornadas()
 	{
 		List<Jornada> jornadas = new ArrayList<Jornada>();
 		jornadas = (List<Jornada>) getJornadaServiceInterface().findAll();
-		for(int i = 0; i < jornadas.size(); i++)
-			System.out.println(jornadas.get(i).getLunes() + " - " + jornadas.get(i).getMartes());
-		return (Jornada) jornadas;
+		return jornadas;
+	}
+	
+	@GetMapping("/jornadaId/{id}")
+	public Optional<Jornada> getJornada(@RequestParam("id") int id)
+	{
+		Optional<Jornada> jornada = getJornadaServiceInterface().findById(id);
+		return jornada;
 	}
 	
 	
