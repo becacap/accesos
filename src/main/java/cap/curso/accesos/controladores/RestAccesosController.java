@@ -1,7 +1,12 @@
 package cap.curso.accesos.controladores;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +47,7 @@ public class RestAccesosController
 		return empleado;
 	}
 
-	@PostMapping("/modificarEmpleado")
+	@PostMapping("/empleados/modificar")
 	public Empleado modificarEmpleado(@RequestBody Empleado empleado)
 	{
 		if(empleado.getJornada().getId()==0) {
@@ -52,7 +57,19 @@ public class RestAccesosController
 		
 		return empleado;
 	}
+	@GetMapping("/empleados")
+	public List<Empleado> getAllEmpleados()
+	{
+		List<Empleado> empleados = new ArrayList<Empleado>();
+		empleados = (ArrayList<Empleado>) getJpaEmpleadoSI().findAll();
+		return empleados;
+	}
 	
+	@GetMapping("/empleados/{id}")
+	public Optional<Empleado> getEmpleado(@PathVariable int id)
+	{
+		return getJpaEmpleadoSI().findById(id);
+	}
 	public EstadosServiceInterface getEstadosServiceInterface()
 	{
 		return estadosServiceInterface;
