@@ -6,7 +6,7 @@
 <html lang="en">
 
 <body>
-	<h1>soy el profe</h1>
+	<h1>ACCESOS</h1>
 </body>
 
 </html>
