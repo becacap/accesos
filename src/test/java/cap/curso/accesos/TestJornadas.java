@@ -6,15 +6,12 @@ import java.util.Optional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import cap.curso.jpa.configuracion.Configuracion;
-import cap.curso.jpa.entidades.Jornada;
-import cap.curso.jpa.servicios.JPAJornadaServiceInterface;
+import cap.curso.accesos.entidades.Jornada;
+import cap.curso.accesos.servicios.JPAJornadaServiceInterface;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = Configuracion.class)
 public class TestJornadas
 {
 

@@ -24,8 +24,10 @@ public class JPAJornadaService implements JPAJornadaServiceInterface
 		return getJornadaRepositoryInterface().findAll();
 	}
 
-	
-	
+	public Optional<Jornada> findById(Integer id)
+	{
+		return getJornadaRepositoryInterface().findById(id);
+	}	
 
 	public JornadaRepositoryInterface getJornadaRepositoryInterface()
 	{
@@ -36,16 +38,4 @@ public class JPAJornadaService implements JPAJornadaServiceInterface
 	{
 		this.jornadaRepositoryInterface = jornadaRepositoryInterface;
 	}
-
-	public Optional<Jornada> findById(Integer id)
-	{
-		// TODO Auto-generated method stub
-		return getJornadaRepositoryInterface().findById(id);
-	}
-
-
-	
-	
-	
-
 }

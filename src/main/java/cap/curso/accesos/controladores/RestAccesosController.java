@@ -34,7 +34,7 @@ public class RestAccesosController
 		return getEstadosServiceInterface().findByDescripcion(descripcion);
 	}
 	
-	@GetMapping("jornada")
+	@GetMapping("/jornada")
 	public Jornada introducirJornada() {
 		Jornada jornada = new Jornada();
 		jornada.setDescripcion("Jornada Completa");
@@ -47,6 +47,8 @@ public class RestAccesosController
 		
 		return getJornadaServiceInterface().save(jornada);
 	}
+	
+	@GetMapping("")
 	
 	
 

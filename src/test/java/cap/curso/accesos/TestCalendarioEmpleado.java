@@ -1,29 +1,15 @@
 package cap.curso.accesos;
 
-import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.sql.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import cap.curso.jpa.configuracion.Configuracion;
-import cap.curso.jpa.entidades.Calendario;
-import cap.curso.jpa.entidades.Empleado;
-import cap.curso.jpa.entidades.Estado;
-import cap.curso.jpa.entidades.Jornada;
-import cap.curso.jpa.entidades.Usuario_Estado;
-import cap.curso.jpa.servicios.CalendarioEmpleadoServiceInterface;
+import cap.curso.accesos.servicios.CalendarioEmpleadoServiceInterface;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = Configuracion.class)
 public class TestCalendarioEmpleado
 {
 	@Autowired
