@@ -13,6 +13,8 @@ public interface CalendarioServiceInterface
 {
 
 	public Iterable<Calendario> findAll();
+	
+	public Calendario findById(Integer idCalendario);
 
 	public Calendario save(Calendario calendario) throws CalendarioAlreadyExistsException;
 

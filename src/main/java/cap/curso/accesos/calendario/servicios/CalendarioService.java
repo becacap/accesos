@@ -52,6 +52,10 @@ public class CalendarioService implements CalendarioServiceInterface
 	{
 		return getCalendarioRepository().findAll();
 	}
+	
+	public Calendario findById(Integer idCalendario) {
+		return getCalendarioRepository().findById(idCalendario).orElse(null);
+	}
 
 	public Calendario save(Calendario calendario) throws CalendarioAlreadyExistsException
 	{

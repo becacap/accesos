@@ -1,8 +1,6 @@
 package cap.curso.accesos.controladores;
 
-import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import cap.curso.accesos.calendario.exception.CalendarioAlreadyExistsException;
@@ -21,7 +20,7 @@ import cap.curso.accesos.entidades.Estado;
 import cap.curso.accesos.estado.exception.EstadoNotFoundException;
 
 @RestController
-@RequestMapping("/calendario")
+@RequestMapping("/api/calendario")
 public class CalendarioRestController
 {
 	@Autowired
@@ -43,7 +42,7 @@ public class CalendarioRestController
 		return getCalendarioService().findAll();
 	}
 
-	@GetMapping("/{anyo}")
+	@GetMapping("/all/{anyo}")
 	public Iterable<Calendario> findByAnyo(@PathVariable("anyo") Integer anyo)
 	{
 		try
@@ -55,12 +54,12 @@ public class CalendarioRestController
 		}
 	}
 
-	@PostMapping("/{anyo}")
-	public Iterable<Calendario> generaCalendario(@PathVariable("anyo") Integer anyo)
+	@PostMapping("/generar")
+	public Iterable<Calendario> generaCalendario(@RequestBody(required = true) AnyoRequest anyo)
 	{
 		try
 		{
-			return getCalendarioService().generaCalendarioAnyo(anyo);
+			return getCalendarioService().generaCalendarioAnyo(anyo.getAnyo());
 		} catch (CalendarioAlreadyExistsException | EstadoNotFoundException e)
 		{
 			return new ArrayList<Calendario>();
@@ -77,6 +76,33 @@ public class CalendarioRestController
 		{
 			System.out.println("No existe ese dia");
 			return null;
+		}
+	}
+
+	@GetMapping("/{id}")
+	public Calendario getCalendario(@PathVariable("id") Integer idCalendario)
+	{
+		return getCalendarioService().findById(idCalendario);
+	}
+
+	private class AnyoRequest
+	{
+
+		public AnyoRequest(Integer anyo)
+		{
+			this.anyo = anyo;
+		}
+
+		private Integer anyo;
+
+		public Integer getAnyo()
+		{
+			return anyo;
+		}
+
+		public void setAnyo(Integer anyo)
+		{
+			this.anyo = anyo;
 		}
 	}
 
