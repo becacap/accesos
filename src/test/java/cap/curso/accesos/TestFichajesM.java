@@ -7,16 +7,16 @@ import java.sql.Date;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import cap.curso.jpa.configuracion.Configuracion;
-import cap.curso.jpa.entidades.Calendario;
-import cap.curso.jpa.entidades.Empleado;
-import cap.curso.jpa.services.UsuariosEstadoServiceInterface;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = Configuracion.class)
+import cap.curso.accesos.entidades.Calendario;
+import cap.curso.accesos.entidades.Empleado;
+import cap.curso.accesos.services.UsuariosEstadoServiceInterface;
+
+@SpringBootTest
 public class TestFichajesM
 {
 
