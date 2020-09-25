@@ -58,7 +58,7 @@ public class RestAccesosController
 		List<Jornada> jornadas = new ArrayList<Jornada>();
 		jornadas = (List<Jornada>) getJornadaServiceInterface().findAll();
 		for(int i = 0; i < jornadas.size(); i++)
-			System.out.println(jornadas.get(i).getLunes());
+			System.out.println(jornadas.get(i).getLunes() + " - " + jornadas.get(i).getMartes());
 		return (Jornada) jornadas;
 	}
 	
