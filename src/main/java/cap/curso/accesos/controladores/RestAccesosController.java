@@ -1,13 +1,11 @@
 package cap.curso.accesos.controladores;
 
 
+import java.util.ArrayList;
 import java.util.List;
-
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +32,7 @@ public class RestAccesosController
 		return getEstadosServiceInterface().findByDescripcion(descripcion);
 	}
 	
-	@GetMapping("/jornada")
+	@PostMapping("/add-jornada")
 	public Jornada introducirJornada() {
 		Jornada jornada = new Jornada();
 		jornada.setDescripcion("Jornada Completa");
@@ -48,7 +46,15 @@ public class RestAccesosController
 		return getJornadaServiceInterface().save(jornada);
 	}
 	
-	@GetMapping("")
+	@GetMapping("/find-jornadas")
+	public Jornada getAllJornadas()
+	{
+		List<Jornada> jornadas = new ArrayList<Jornada>();
+		jornadas = (List<Jornada>) getJornadaServiceInterface().findAll();
+		for(int i = 0; i < jornadas.size(); i++)
+			System.out.println(jornadas.get(i).getLunes());
+		return (Jornada) jornadas;
+	}
 	
 	
 
