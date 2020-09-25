@@ -9,9 +9,4 @@ import cap.curso.accesos.entidades.Usuario_Estado;
 public interface CalendarioEmpleadoRepositoryInterface extends CrudRepository<Usuario_Estado, Integer>
 {
 
-	//@Query("update Calendario c set c.estado=:estado where c.id = id_calendario")
-	//public void update(Integer id_calendario, Integer id_empleado, Integer id_jornada, Integer id_estado);
-
-
-
 }
