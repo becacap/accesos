@@ -59,7 +59,7 @@ public class CalendarioRestController
 	{
 		try
 		{
-			return getCalendarioService().generaCalendarioAnyo(anyo.getAnyo());
+			return getCalendarioService().generaCalendarioAnyo(Integer.parseInt(anyo.getAnyo()));
 		} catch (CalendarioAlreadyExistsException | EstadoNotFoundException e)
 		{
 			return new ArrayList<Calendario>();
@@ -88,19 +88,14 @@ public class CalendarioRestController
 	private class AnyoRequest
 	{
 
-		public AnyoRequest(Integer anyo)
-		{
-			this.anyo = anyo;
-		}
+		private String anyo;
 
-		private Integer anyo;
-
-		public Integer getAnyo()
+		public String getAnyo()
 		{
 			return anyo;
 		}
 
-		public void setAnyo(Integer anyo)
+		public void setAnyo(String anyo)
 		{
 			this.anyo = anyo;
 		}
