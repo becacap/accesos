@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -63,6 +64,19 @@ public class CalendarioRestController
 		} catch (CalendarioAlreadyExistsException | EstadoNotFoundException e)
 		{
 			return new ArrayList<Calendario>();
+		}
+	}
+
+	@PostMapping("/actualizar/{dia_id}")
+	public Calendario actualizarDiaEnCalendario(@PathVariable("dia_id") int dia_id, @RequestBody Estado estado)
+	{
+		try
+		{
+			return getCalendarioService().updateCalendarioEstado(dia_id, estado);
+		} catch (CalendarioNotFoundException e)
+		{
+			System.out.println("No existe ese dia");
+			return null;
 		}
 	}
 
