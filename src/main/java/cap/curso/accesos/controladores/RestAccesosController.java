@@ -43,26 +43,8 @@ public class RestAccesosController
 	
 	@GetMapping("/add-jornada")
 	public Jornada introducirJornada(@RequestBody Jornada jornada) {
-		
-		//comprobar si el id es 0 o no. SI es 0 se inserta, si no se descarta
-		
-		/*Jornada jornada = new Jornada();
-		jornada.setDescripcion("Jornada Completa");
-		jornada.setLunes("8:00-14:00&15:00-17:30");
-		jornada.setMartes("8:00-14:00&15:00-17:30");
-		jornada.setMiercoles("8:00-14:00&15:00-17:30");
-		jornada.setJueves("8:00-14:00&15:00-17:30");
-		jornada.setViernes("8:00-15:00");
-		jornada.setEspecial(0);*/
-		
-		if(jornada.getId() == 0)
-		{
-			return getJornadaServiceInterface().save(jornada);
-		}
-		else
-		{
-			return null;
-		}
+		if(jornada.getId() == 0) return getJornadaServiceInterface().save(jornada);
+		else return null;
 	}
 	
 	@GetMapping("/jornada")
@@ -79,9 +61,7 @@ public class RestAccesosController
 		return getJornadaServiceInterface().findById(id);
 	}
 	
-	
-
-	@PostMapping("/modificarJornada")
+    @PostMapping("/modificarJornada")
 	public Empleado modificarJornada(@RequestBody Empleado empleado)
 	{
 		empleado.setJornada(getjPAJornadaServiceInterface().save(empleado.getJornada()));
@@ -89,7 +69,7 @@ public class RestAccesosController
 		return empleado;
 	}
 
-	@PostMapping("/empleados/modificar")
+	@GetMapping("/modificarEmpleados")
 	public Empleado modificarEmpleado(@RequestBody Empleado empleado)
 	{
 		if(empleado.getJornada().getId()==0) {
