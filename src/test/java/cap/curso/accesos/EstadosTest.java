@@ -1,16 +1,14 @@
 package cap.curso.accesos;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import cap.curso.accesos.entidades.Estado;
 import cap.curso.accesos.estado.exception.EstadoNotFoundException;
 import cap.curso.accesos.estado.servicios.EstadosServiceInterface;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
 public class EstadosTest
 {
 

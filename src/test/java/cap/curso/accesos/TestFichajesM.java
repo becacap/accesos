@@ -1,20 +1,19 @@
 package cap.curso.accesos;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.sql.Date;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import cap.curso.accesos.entidades.Calendario;
 import cap.curso.accesos.entidades.Empleado;
 import cap.curso.accesos.services.UsuariosEstadoServiceInterface;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
 public class TestFichajesM
 {
 

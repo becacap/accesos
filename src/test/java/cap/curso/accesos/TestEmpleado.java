@@ -8,16 +8,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import cap.curso.accesos.entidades.Empleado;
 import cap.curso.accesos.entidades.Jornada;
 import cap.curso.accesos.servicios.JPAEmpleadoServiceInterface;
 import cap.curso.accesos.servicios.JPAJornadaServiceInterface;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
 
 public class TestEmpleado
 {
