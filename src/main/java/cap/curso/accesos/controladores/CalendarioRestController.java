@@ -36,7 +36,7 @@ public class CalendarioRestController
 		this.calendarioService = calendarioService;
 	}
 
-	@GetMapping("")
+	@GetMapping("/")
 	public Iterable<Calendario> findAll()
 	{
 		return getCalendarioService().findAll();
