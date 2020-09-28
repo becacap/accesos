@@ -71,16 +71,6 @@ public class RestAccesosController
 		getJpaEmpleadoSI().save(empleado);
 		return empleado;
 	}
-	
-	@PostMapping("/modificarEmpleado")
-	public Empleado modificarEmpleado(@RequestBody Empleado empleado)
-	{
-		empleado.setJornada(getjPAJornadaServiceInterface().save(empleado.getJornada()));
-		if(empleado.getId()==0) {
-			getJpaEmpleadoSI().save(empleado);
-		}
-		return empleado;
-	}
 
 	@GetMapping("/modificarEmpleados")
 	public Empleado modificarEmpleado(@RequestBody Empleado empleado)
