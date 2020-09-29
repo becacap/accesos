@@ -47,6 +47,14 @@ public class CalendarioEmpleadoService implements CalendarioEmpleadoServiceInter
 		return (List<Usuario_Estado>) getCalendarioEmpleadoRepository().findAll();
 	}
 
+
+	@Override
+	public void delete(Usuario_Estado usuarioEstado)
+	{
+		// TODO Auto-generated method stub
+		 getCalendarioEmpleadoRepository().delete(usuarioEstado);
+	}
+
 	
 	
 

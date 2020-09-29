@@ -16,4 +16,6 @@ public interface CalendarioEmpleadoServiceInterface
 	
 	public List<Usuario_Estado>  findAll();
 	
+	public void delete(Usuario_Estado usuario);
+	
 }
