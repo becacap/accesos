@@ -36,5 +36,10 @@ public class EstadosService implements EstadosServiceInterface
 		// TODO Auto-generated method stub
 		return (List<Estado>) getEstadosRepository().findAll();
 	}
+	
+	public Estado save(Estado estado) {
+		
+		return getEstadosRepository().save(estado);
+	}
 
 }

@@ -12,4 +12,5 @@ public interface EstadosServiceInterface
 
 	public Estado findByDescripcion(String descripcion);
 	public List<Estado> getEstados();
+	public Estado save(Estado estado);
 }
