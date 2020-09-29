@@ -44,7 +44,7 @@ public class RestCalendarioEmpleadoControler
 	@GetMapping("/calendario-empleado/{id}")
 	public Usuario_Estado getCalendarioEmpleadoById(@PathVariable("id") Integer id)
 	{
-		return calendarioEmpleadoServiceInterface.findById(id).get();
+		return calendarioEmpleadoServiceInterface.findById(id);
 	}
 
 	@GetMapping("")

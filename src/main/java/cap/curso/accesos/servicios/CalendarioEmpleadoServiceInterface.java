@@ -1,5 +1,6 @@
 package cap.curso.accesos.servicios;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -11,6 +12,8 @@ public interface CalendarioEmpleadoServiceInterface
 {
 	public Usuario_Estado save(Usuario_Estado usuario_Estado);
 
-	public Optional<Usuario_Estado> findById(Integer id);
+	public Usuario_Estado findById(Integer id);
+	
+	public List<Usuario_Estado>  findAll();
 	
 }

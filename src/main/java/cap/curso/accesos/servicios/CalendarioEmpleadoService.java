@@ -1,5 +1,6 @@
 package cap.curso.accesos.servicios;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,17 @@ public class CalendarioEmpleadoService implements CalendarioEmpleadoServiceInter
 
 
 	@Override
-	public Optional<Usuario_Estado> findById(Integer id)
+	public Usuario_Estado findById(Integer id)
 	{
-		return getCalendarioEmpleadoRepository().findById(id);
+		return getCalendarioEmpleadoRepository().findById(id).orElse(null);
+	}
+
+
+	@Override
+	public List<Usuario_Estado> findAll()
+	{
+		// TODO Auto-generated method stub
+		return (List<Usuario_Estado>) getCalendarioEmpleadoRepository().findAll();
 	}
 
 	
