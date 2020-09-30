@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import cap.curso.accesos.DTOs.RegistroDto;
 import cap.curso.accesos.calendario.servicios.CalendarioServiceInterface;
 import cap.curso.accesos.entidades.Calendario;
 import cap.curso.accesos.entidades.Empleado;
 import cap.curso.accesos.entidades.Jornada;
 import cap.curso.accesos.entidades.Usuario_Estado;
 import cap.curso.accesos.estado.servicios.EstadosServiceInterface;
+import cap.curso.accesos.services.UsuariosEstadoServiceInterface;
 import cap.curso.accesos.servicios.CalendarioEmpleadoServiceInterface;
 import cap.curso.accesos.servicios.JPAEmpleadoServiceInterface;
 import cap.curso.accesos.servicios.JPAJornadaServiceInterface;
@@ -34,6 +36,9 @@ public class RestCalendarioEmpleadoControler
 	private JPAJornadaServiceInterface jpaJornadaServiceInterface;
 	@Autowired
 	private EstadosServiceInterface estadosServiceInterface;
+	
+	@Autowired
+	private UsuariosEstadoServiceInterface usuariosEstadosService;
 
 	@GetMapping("/calendario-empleado")
 	public Usuario_Estado getCalendarioEmpleado(@RequestParam("usuario_Estado") Usuario_Estado usuario_Estado)
@@ -81,6 +86,16 @@ public class RestCalendarioEmpleadoControler
 	{
 
 		return calendarioEmpleadoServiceInterface.save(usuario_Estado);
+	}
+	
+	@GetMapping("/cuadrante")
+	public Iterable<Usuario_Estado> getCuadrante(){
+		return getUsuariosEstadosService().findAll();
+	}
+	
+	@PostMapping("/cuadrante/guardar-registro")
+	public Usuario_Estado guardar(@RequestBody RegistroDto registro) {
+		return getUsuariosEstadosService().save(registro);
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -134,6 +149,16 @@ public class RestCalendarioEmpleadoControler
 	public void setEstadosServiceInterface(EstadosServiceInterface estadosServiceInterface)
 	{
 		this.estadosServiceInterface = estadosServiceInterface;
+	}
+	
+	public UsuariosEstadoServiceInterface getUsuariosEstadosService()
+	{
+		return usuariosEstadosService;
+	}
+
+	public void setUsuariosEstadosService(UsuariosEstadoServiceInterface usuariosEstadosService)
+	{
+		this.usuariosEstadosService = usuariosEstadosService;
 	}
 
 }
