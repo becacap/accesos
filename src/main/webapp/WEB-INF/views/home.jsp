@@ -13,29 +13,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="./resources/curso.js"></script>
+    <script src="./resources/clases.js"></script>
 
     
 </head>
 
 <body>
     <div class="container">
-        <h1 class="pepe">EJEMPLO DE SELECTORES</h1>
-        <h1>EJEMPLO DE SELECTORES</h1>
-        <h1 id="pepe" class="pepe">EJEMPLO DE SELECTORES</h1>
-        <h1>EJEMPLO DE SELECTORES</h1>
-        <h1 class="pepe">EJEMPLO DE SELECTORES</h1>
-        <div>
-            <h1>EJEMPLO DE SELECTORES</h1>
-        </div>
-
-
-        <button onclick="saludar()">Saludar</button>
+        <div id="capa"></div>
 
         <form action="">
-            estados:<select id="estados"></select>
+            Empleado: <select id="empleados"></select>
+            <br>Estado: <select id="estados"></select>
             <br><input type="date" id="fecha">
+            <br><input type="time" id="hora">
         </form>
-        <div id="capa"></div>
+        
     </div>
 </body>
 
