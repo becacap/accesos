@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cap.curso.accesos.calendario.DTOs.AnyoRequestDto;
-import cap.curso.accesos.calendario.exception.CalendarioAlreadyExistsException;
-import cap.curso.accesos.calendario.exception.CalendarioNotFoundException;
-import cap.curso.accesos.calendario.servicios.CalendarioService;
-import cap.curso.accesos.calendario.servicios.CalendarioServiceInterface;
+import cap.curso.accesos.DTOs.AnyoRequestDto;
 import cap.curso.accesos.entidades.Calendario;
 import cap.curso.accesos.entidades.Estado;
-import cap.curso.accesos.estado.exception.EstadoNotFoundException;
+import cap.curso.accesos.exception.CalendarioAlreadyExistsException;
+import cap.curso.accesos.exception.CalendarioNotFoundException;
+import cap.curso.accesos.exception.EstadoNotFoundException;
+import cap.curso.accesos.servicios.CalendarioService;
+import cap.curso.accesos.servicios.CalendarioServiceInterface;
 
 @RestController
 @RequestMapping("/api/calendario")
@@ -34,6 +34,11 @@ public class CalendarioRestController
 	public void setCalendarioService(CalendarioService calendarioService)
 	{
 		this.calendarioService = calendarioService;
+	}
+	
+	@GetMapping("/usuariosEstados")
+	public Iterable<Calendario> getUsuariosEstados(){
+		return getCalendarioService().findAll();
 	}
 
 	@GetMapping("/")

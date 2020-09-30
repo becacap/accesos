@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import cap.curso.accesos.entidades.Estado;
-import cap.curso.accesos.estado.exception.EstadoNotFoundException;
-import cap.curso.accesos.estado.servicios.EstadosServiceInterface;
+import cap.curso.accesos.exception.EstadoNotFoundException;
+import cap.curso.accesos.servicios.EstadosServiceInterface;
 
 @SpringBootTest
 public class EstadosTest

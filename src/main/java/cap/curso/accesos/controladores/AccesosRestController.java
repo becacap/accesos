@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,24 +18,25 @@ import org.springframework.web.bind.annotation.RestController;
 import cap.curso.accesos.entidades.Empleado;
 import cap.curso.accesos.entidades.Estado;
 import cap.curso.accesos.entidades.Jornada;
-import cap.curso.accesos.estado.servicios.EstadosServiceInterface;
-import cap.curso.accesos.servicios.JPAEmpleadoServiceInterface;
-import cap.curso.accesos.servicios.JPAJornadaServiceInterface;
+import cap.curso.accesos.servicios.EstadosServiceInterface;
+import cap.curso.accesos.servicios.EmpleadoServiceInterface;
+import cap.curso.accesos.servicios.JornadaServiceInterface;
 
 
 @RestController
 @RequestMapping("/api")
-public class RestAccesosController
+public class AccesosRestController
 {
 	@Autowired
 	private EstadosServiceInterface estadosServiceInterface;
 
 	@Autowired
-	private JPAJornadaServiceInterface jPAJornadaServiceInterface;
+	private JornadaServiceInterface jPAJornadaServiceInterface;
 
 	@Autowired
-	private JPAEmpleadoServiceInterface jpaEmpleadoSI;
+	private EmpleadoServiceInterface jpaEmpleadoSI;
 	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value="/estados")
 	public Estado grabaEstado(@RequestBody Estado estado) {
 		
@@ -102,12 +103,12 @@ public class RestAccesosController
 	{
 		return getJpaEmpleadoSI().findById(id);
 	}
-	public JPAJornadaServiceInterface getJornadaServiceInterface()
+	public JornadaServiceInterface getJornadaServiceInterface()
 	{
 		return jPAJornadaServiceInterface;
 	}
 
-	public void setJornadaServiceInterface(JPAJornadaServiceInterface jornadaServiceInterface)
+	public void setJornadaServiceInterface(JornadaServiceInterface jornadaServiceInterface)
 	{
 		this.jPAJornadaServiceInterface = jornadaServiceInterface;
 	}
@@ -122,22 +123,22 @@ public class RestAccesosController
 		this.estadosServiceInterface = estadosServiceInterface;
 	}
 
-	public cap.curso.accesos.servicios.JPAEmpleadoServiceInterface getJpaEmpleadoSI()
+	public cap.curso.accesos.servicios.EmpleadoServiceInterface getJpaEmpleadoSI()
 	{
 		return jpaEmpleadoSI;
 	}
 
-	public void setJpaEmpleadoSI(cap.curso.accesos.servicios.JPAEmpleadoServiceInterface jpaEmpleadoSI)
+	public void setJpaEmpleadoSI(cap.curso.accesos.servicios.EmpleadoServiceInterface jpaEmpleadoSI)
 	{
 		this.jpaEmpleadoSI = jpaEmpleadoSI;
 	}
 
-	public JPAJornadaServiceInterface getjPAJornadaServiceInterface()
+	public JornadaServiceInterface getjPAJornadaServiceInterface()
 	{
 		return jPAJornadaServiceInterface;
 	}
 
-	public void setjPAJornadaServiceInterface(JPAJornadaServiceInterface jPAJornadaServiceInterface)
+	public void setjPAJornadaServiceInterface(JornadaServiceInterface jPAJornadaServiceInterface)
 	{
 		this.jPAJornadaServiceInterface = jPAJornadaServiceInterface;
 	}

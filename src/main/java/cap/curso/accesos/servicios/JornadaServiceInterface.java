@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import cap.curso.accesos.entidades.Jornada;
 
 @Service
-public interface JPAJornadaServiceInterface
+public interface JornadaServiceInterface
 {
 	
 	public Jornada save(Jornada jornada);

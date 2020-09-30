@@ -1,4 +1,4 @@
-package cap.curso.accesos.estado.servicios;
+package cap.curso.accesos.servicios;
 
 import java.util.List;
 

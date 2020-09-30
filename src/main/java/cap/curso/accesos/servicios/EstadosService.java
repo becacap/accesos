@@ -1,4 +1,4 @@
-package cap.curso.accesos.estado.servicios;
+package cap.curso.accesos.servicios;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cap.curso.accesos.entidades.Estado;
-import cap.curso.accesos.estado.repositorios.EstadosRepository;
+import cap.curso.accesos.repositorios.EstadosRepository;
 
 @Service
 public class EstadosService implements EstadosServiceInterface

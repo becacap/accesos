@@ -1,4 +1,4 @@
-package cap.curso.accesos.estado.exception;
+package cap.curso.accesos.exception;
 
 @SuppressWarnings("serial")
 public class EstadoNotFoundException extends Exception

@@ -1,4 +1,6 @@
-package cap.curso.accesos.services;
+package cap.curso.accesos.servicios;
+
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -10,5 +12,6 @@ import cap.curso.accesos.entidades.Usuario_Estado;
 public interface UsuariosEstadoServiceInterface {
 	
 	public Usuario_Estado getDiasTrabajadosEmpleadoByYearByMes (Empleado empleado, Calendario cal);
+	public List<Usuario_Estado> findAll();
 	
 }

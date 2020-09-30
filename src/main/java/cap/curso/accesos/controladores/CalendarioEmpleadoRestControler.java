@@ -9,19 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import cap.curso.accesos.calendario.servicios.CalendarioServiceInterface;
-import cap.curso.accesos.entidades.Calendario;
 import cap.curso.accesos.entidades.Empleado;
 import cap.curso.accesos.entidades.Jornada;
 import cap.curso.accesos.entidades.Usuario_Estado;
-import cap.curso.accesos.estado.servicios.EstadosServiceInterface;
 import cap.curso.accesos.servicios.CalendarioEmpleadoServiceInterface;
-import cap.curso.accesos.servicios.JPAEmpleadoServiceInterface;
-import cap.curso.accesos.servicios.JPAJornadaServiceInterface;
+import cap.curso.accesos.servicios.CalendarioServiceInterface;
+import cap.curso.accesos.servicios.EstadosServiceInterface;
+import cap.curso.accesos.servicios.EmpleadoServiceInterface;
+import cap.curso.accesos.servicios.JornadaServiceInterface;
 
 @RestController
 @RequestMapping("/api")
-public class RestCalendarioEmpleadoControler
+public class CalendarioEmpleadoRestControler
 {
 	@Autowired
 	private CalendarioEmpleadoServiceInterface calendarioEmpleadoServiceInterface;
@@ -29,9 +28,9 @@ public class RestCalendarioEmpleadoControler
 	@Autowired
 	private CalendarioServiceInterface calendarioServiceInterface;
 	@Autowired
-	private JPAEmpleadoServiceInterface jpaEmpleadoServiceInterface;
+	private EmpleadoServiceInterface jpaEmpleadoServiceInterface;
 	@Autowired
-	private JPAJornadaServiceInterface jpaJornadaServiceInterface;
+	private JornadaServiceInterface jpaJornadaServiceInterface;
 	@Autowired
 	private EstadosServiceInterface estadosServiceInterface;
 
@@ -106,22 +105,22 @@ public class RestCalendarioEmpleadoControler
 		this.calendarioServiceInterface = calendarioServiceInterface;
 	}
 
-	public JPAEmpleadoServiceInterface getJpaEmpleadoServiceInterface()
+	public EmpleadoServiceInterface getJpaEmpleadoServiceInterface()
 	{
 		return jpaEmpleadoServiceInterface;
 	}
 
-	public void setJpaEmpleadoServiceInterface(JPAEmpleadoServiceInterface jpaEmpleadoServiceInterface)
+	public void setJpaEmpleadoServiceInterface(EmpleadoServiceInterface jpaEmpleadoServiceInterface)
 	{
 		this.jpaEmpleadoServiceInterface = jpaEmpleadoServiceInterface;
 	}
 
-	public JPAJornadaServiceInterface getJpaJornadaServiceInterface()
+	public JornadaServiceInterface getJpaJornadaServiceInterface()
 	{
 		return jpaJornadaServiceInterface;
 	}
 
-	public void setJpaJornadaServiceInterface(JPAJornadaServiceInterface jpaJornadaServiceInterface)
+	public void setJpaJornadaServiceInterface(JornadaServiceInterface jpaJornadaServiceInterface)
 	{
 		this.jpaJornadaServiceInterface = jpaJornadaServiceInterface;
 	}

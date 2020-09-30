@@ -8,7 +8,7 @@ import cap.curso.accesos.entidades.Empleado;
 import cap.curso.accesos.entidades.Jornada;
 
 @Service
-public interface JPAEmpleadoServiceInterface
+public interface EmpleadoServiceInterface
 {
 	public Empleado save(Empleado empleado);
 	

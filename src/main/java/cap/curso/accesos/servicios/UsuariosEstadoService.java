@@ -1,4 +1,6 @@
-package cap.curso.accesos.services;
+package cap.curso.accesos.servicios;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,13 @@ public class UsuariosEstadoService implements UsuariosEstadoServiceInterface {
 
 	public void setRepositorio(UsuariosEstadoRepositoryInterface repositorio) {
 		this.repositorio = repositorio;
+	}
+
+	@Override
+	public List<Usuario_Estado> findAll()
+	{
+		// TODO Auto-generated method stub
+		return (List<Usuario_Estado>) getRepositorio().findAll();
 	}
 
 }

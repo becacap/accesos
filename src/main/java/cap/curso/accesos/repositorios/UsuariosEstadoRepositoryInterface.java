@@ -16,4 +16,8 @@ public interface UsuariosEstadoRepositoryInterface extends CrudRepository<Usuari
 
 	@Query("from Usuario_Estado ue where ue.empleado=:empleado and ue.calendario=:calendario")
 	public Usuario_Estado getUsuarioEstadoByEmpleado(Empleado empleado,Calendario calendario);
+	
+	
+	
+	
 }

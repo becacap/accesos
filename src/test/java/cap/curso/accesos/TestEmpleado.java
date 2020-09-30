@@ -13,8 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import cap.curso.accesos.entidades.Empleado;
 import cap.curso.accesos.entidades.Jornada;
-import cap.curso.accesos.servicios.JPAEmpleadoServiceInterface;
-import cap.curso.accesos.servicios.JPAJornadaServiceInterface;
+import cap.curso.accesos.servicios.EmpleadoServiceInterface;
+import cap.curso.accesos.servicios.JornadaServiceInterface;
 
 @SpringBootTest
 
@@ -22,10 +22,10 @@ public class TestEmpleado
 {
 
 	@Autowired
-	private JPAEmpleadoServiceInterface jpaEmpleadoSI;
+	private EmpleadoServiceInterface jpaEmpleadoSI;
 
 	@Autowired
-	private JPAJornadaServiceInterface jpaJornadaSI;
+	private JornadaServiceInterface jpaJornadaSI;
 	
 //	@Test
 	public void crearEmpleado(){
@@ -75,11 +75,11 @@ public class TestEmpleado
 
 	}
 
-	public JPAEmpleadoServiceInterface getJpaEmpleadoSI()
+	public EmpleadoServiceInterface getJpaEmpleadoSI()
 	{
 		return jpaEmpleadoSI;
 	}
-	public void setJpaEmpleadoSI(JPAEmpleadoServiceInterface jpaEmpleadoSI)
+	public void setJpaEmpleadoSI(EmpleadoServiceInterface jpaEmpleadoSI)
 	{
 		this.jpaEmpleadoSI = jpaEmpleadoSI;
 	}

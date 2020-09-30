@@ -10,7 +10,7 @@ import cap.curso.accesos.entidades.Jornada;
 import cap.curso.accesos.repositorios.EmpleadoRepositoryInterface;
 
 @Service
-public class JPAEmpleadoService implements JPAEmpleadoServiceInterface
+public class EmpleadoService implements EmpleadoServiceInterface
 {
 	@Autowired
 	private EmpleadoRepositoryInterface empleadoRepo;

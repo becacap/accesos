@@ -9,7 +9,7 @@ import cap.curso.accesos.entidades.Jornada;
 import cap.curso.accesos.repositorios.JornadaRepositoryInterface;
 
 @Service
-public class JPAJornadaService implements JPAJornadaServiceInterface
+public class JornadaService implements JornadaServiceInterface
 {
 	@Autowired
 	JornadaRepositoryInterface jornadaRepositoryInterface;
