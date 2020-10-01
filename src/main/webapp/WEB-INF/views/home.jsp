@@ -15,7 +15,7 @@
     <script src="./resources/curso.js"></script>
     <script src="./resources/clases.js"></script>
 
-    
+
 </head>
 
 <body>
@@ -23,12 +23,29 @@
         <div id="capa"></div>
 
         <form action="">
-            Empleado: <select id="empleados"></select>
-            <br>Estado: <select id="estados"></select>
-            <br><input type="date" id="fecha">
-            <br><input type="time" id="hora">
+            <input type="hidden" id="idRegistro" value="0">
+            <div class="form-group">
+                <label>Empleado:</label>
+                <select id="empleados" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label>Estado:</label>
+                <select id="estados" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label>Calendario:</label>
+                <select id="calendarios" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label>Jornadas:</label>
+                <select id="jornadas" class="form-control"></select>
+            </div>
+            <input type="button" value="Aceptar" onclick="recogerFormulario()">
+
+            <!--<br><input type="date" id="fecha">
+            <br><input type="time" id="hora">-->
         </form>
-        
+
     </div>
 </body>
 

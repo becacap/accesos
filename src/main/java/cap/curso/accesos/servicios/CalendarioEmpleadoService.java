@@ -55,6 +55,16 @@ public class CalendarioEmpleadoService implements CalendarioEmpleadoServiceInter
 		 getCalendarioEmpleadoRepository().delete(usuarioEstado);
 	}
 
+
+	@Override
+	public void deleteById(int id)
+	{
+		getCalendarioEmpleadoRepository().deleteById(id);
+		
+	}
+	
+	
+
 	
 	
 

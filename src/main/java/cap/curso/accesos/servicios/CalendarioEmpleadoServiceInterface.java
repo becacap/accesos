@@ -18,4 +18,6 @@ public interface CalendarioEmpleadoServiceInterface
 	
 	public void delete(Usuario_Estado usuario);
 	
+	public void deleteById(int id);
+	
 }

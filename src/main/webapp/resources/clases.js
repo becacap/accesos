@@ -35,7 +35,7 @@ class Estado {
 class Calendario {
     constructor(id, fecha, estado) {
         this.id = id;
-        this.descripcion = this.descripcion;
+        this.fecha = fecha;
         this.estado = estado;
     }
 }
