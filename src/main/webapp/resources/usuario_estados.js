@@ -1,9 +1,3 @@
-var empleados = [];
-var jornadas = [];
-var estados = [];
-var calendarios = [];
-var usuarioEstados = [];
-
 class Estado {
     constructor(id, descripcion, tipo) {
         this.id = id;
@@ -87,10 +81,20 @@ function grabarDatos(url, dato) {
     })
 }
 
-function cargarEstados() {
-    obtenerDatos("/estados").then(function(listaEstados) {
+function borrarDatos(url, dato) {
+    return new Promise(function(resolve, reject) {
+        var headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        fetch(url, {
+            "headers": headers,
+            "method": "POST",
+            "body": JSON.stringify(dato)
+        }).then(response => response);
+    })
+}
 
-        estados = estados.concat(listaEstados)
+function cargarEstados() {
+    obtenerDatos("/estados").then(function(estados) {
 
         var componente = document.querySelector("#estados");
 
@@ -105,9 +109,7 @@ function cargarEstados() {
 }
 
 function cargarEmpleados() {
-    obtenerDatos("/api/empleados").then(function(listaEmpleados) {
-
-        empleados = empleados.concat(listaEmpleados)
+    obtenerDatos("/api/empleados").then(function(empleados) {
 
         var componente = document.querySelector("#empleados");
 
@@ -122,9 +124,7 @@ function cargarEmpleados() {
 }
 
 function cargarJornadas() {
-    obtenerDatos("/api/jornada").then(function(listaJornadas) {
-
-        jornadas = jornadas.concat(listaJornadas)
+    obtenerDatos("/api/jornada").then(function(jornadas) {
 
         var componente = document.querySelector("#jornadas");
 
@@ -139,9 +139,7 @@ function cargarJornadas() {
 }
 
 function cargarCalendarios() {
-    obtenerDatos("/api/calendario/").then(function(listaCalendarios) {
-
-        calendarios = calendarios.concat(listaCalendarios)
+    obtenerDatos("/api/calendario/").then(function(calendarios) {
 
         var componente = document.querySelector("#calendarios");
 
@@ -155,40 +153,36 @@ function cargarCalendarios() {
     })
 }
 
-function modificarBt(empleado, jornada, estado, fecha) {
-
-    var componente = document.querySelector("#empleados")
-
-    // console.log(componente.options[0].text)
-
-    var selected = componente.options.selectedIndex = 1;
-
-    console.log(selected);
+function modificarBt(idEmpleado, idJornada, idEstado, idCalendario) {
+    document.getElementById("empleados").value = idEmpleado;
+    document.getElementById("jornadas").value = idJornada;
+    document.getElementById("estados").value = idEstado;
+    document.getElementById("calendarios").value = idCalendario;
 }
 
 function borrarBt(idRegistro) {
-    console.log(idRegistro)
+    borrarDatos("/api/cuadrante/borrar-registro", new Usuario_estados(idRegistro)).then(function() {});
 }
 
-function addLineaATabla(idRegistro, nombre, apellidos, jornadaDesc, estadoDesc, fecha) {
+function addLineaATabla(ue) {
     var componente = document.querySelector("#mi-table");
 
     var tr = document.createElement("tr");
 
     var tdUsuario = document.createElement("td");
-    tdUsuario.appendChild(document.createTextNode(`${apellidos}, ${nombre}`))
+    tdUsuario.appendChild(document.createTextNode(`${ue.empleado.apellidos}, ${ue.empleado.nombre}`))
     tr.appendChild(tdUsuario)
 
     var tdJornada = document.createElement("td");
-    tdJornada.appendChild(document.createTextNode(jornadaDesc))
+    tdJornada.appendChild(document.createTextNode(ue.jornada.descripcion))
     tr.appendChild(tdJornada);
 
     var tdEstado = document.createElement("td");
-    tdEstado.appendChild(document.createTextNode(estadoDesc))
+    tdEstado.appendChild(document.createTextNode(ue.estado.descripcion))
     tr.appendChild(tdEstado)
 
     var tdCalendario = document.createElement("td");
-    tdCalendario.appendChild(document.createTextNode(fecha))
+    tdCalendario.appendChild(document.createTextNode(ue.calendario.fecha))
     tr.appendChild(tdCalendario)
 
     var tdBotones = document.createElement("td");
@@ -199,10 +193,8 @@ function addLineaATabla(idRegistro, nombre, apellidos, jornadaDesc, estadoDesc, 
     btModificar.classList.add("btn")
     btModificar.classList.add("btn-primary")
     btModificar.textContent = "Modificar"
-    btModificar.value = idRegistro;
     btModificar.onclick = function() {
-        muestraDatosCargados();
-        modificarBt(`${apellidos}, ${nombre}`, jornadaDesc, estadoDesc, fecha);
+        modificarBt(ue.empleado.id, ue.jornada.id, ue.estado.id, ue.calendario.id);
     }
     tdBotones.appendChild(btModificar)
 
@@ -211,9 +203,9 @@ function addLineaATabla(idRegistro, nombre, apellidos, jornadaDesc, estadoDesc, 
     btBorrar.classList.add("btn")
     btBorrar.classList.add("btn-danger")
     btBorrar.textContent = "Borrar"
-    btBorrar.value = idRegistro;
     btBorrar.onclick = function() {
-        borrarBt(idRegistro);
+        borrarBt(ue.id);
+        componente.removeChild(tr);
     }
     tdBotones.appendChild(btBorrar)
 
@@ -223,24 +215,23 @@ function addLineaATabla(idRegistro, nombre, apellidos, jornadaDesc, estadoDesc, 
 }
 
 function cargarUsuarioEstados() {
-    obtenerDatos("/api/cuadrante").then(function(lineaCuadrante) {
-
-        usuarioEstados = usuarioEstados.concat(lineaCuadrante);
+    obtenerDatos("/api/cuadrante").then(function(usuarioEstados) {
 
         usuarioEstados.forEach(x => {
-            addLineaATabla(
-                x.id,
-                x.empleado.nombre,
-                x.empleado.apellidos,
-                x.jornada.descripcion,
-                x.estado.descripcion,
-                x.calendario.fecha)
+            addLineaATabla(x)
         })
 
     })
 }
 
-function guardarRegistro(id = 0) {
+function borrarTabla() {
+    var tabla = document.querySelector("#mi-table");
+    while (tabla.childElementCount > 1) {
+        tabla.removeChild(tabla.lastChild);
+    }
+}
+
+function guardarRegistro() {
     var listaEmpleados = document.getElementById("empleados")
     var empleadoSelected = listaEmpleados.options[listaEmpleados.selectedIndex].value;
 
@@ -257,6 +248,7 @@ function guardarRegistro(id = 0) {
         empleadoSelected !== "empty" &&
         jornadaSelected !== "empty" &&
         estadoSelected !== "empty") {
+
         var registro = new Registro(empleadoSelected, jornadaSelected, estadoSelected, calendarioSelected)
 
         grabarDatos("api/cuadrante/guardar-registro", registro).then(function(x) {
@@ -264,13 +256,8 @@ function guardarRegistro(id = 0) {
             if (x.id == 0) {
                 alert("El registro no se ha guardado")
             } else {
-                addLineaATabla(
-                    x.id,
-                    x.empleado.nombre,
-                    x.empleado.apellidos,
-                    x.jornada.descripcion,
-                    x.estado.descripcion,
-                    x.calendario.fecha)
+                borrarTabla();
+                cargarUsuarioEstados();
             }
         })
     } else {
