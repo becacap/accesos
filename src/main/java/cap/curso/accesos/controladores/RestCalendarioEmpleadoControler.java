@@ -97,6 +97,12 @@ public class RestCalendarioEmpleadoControler
 	public Usuario_Estado guardar(@RequestBody RegistroDto registro) {
 		return getUsuariosEstadosService().save(registro);
 	}
+	
+	@PostMapping("/cuadrante/borrar-registro")
+	public void delete(@RequestBody Usuario_Estado ue) {
+		getUsuariosEstadosService().delete(ue);
+	}
+	
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 

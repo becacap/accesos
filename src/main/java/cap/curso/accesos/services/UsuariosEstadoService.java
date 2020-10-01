@@ -96,14 +96,36 @@ public class UsuariosEstadoService implements UsuariosEstadoServiceInterface
 		return getRepositorio().findAll();
 	}
 
-	@Override
 	public Usuario_Estado save(RegistroDto registro)
 	{
 		Empleado emp = getEmpleadosRepository().findById(registro.getIdEmpleado()).orElse(null);
 		Jornada jor = getJornadaRepository().findById(registro.getIdJornada()).orElse(null);
 		Estado est = getEstadoRepository().findById(registro.getIdEstado()).orElse(null);
+		Calendario cal = getCalendarioRepository().findById(registro.getIdCalendario()).orElse(null);
 		
-		return null;
+		Usuario_Estado ue = getRepositorio().getUsuarioEstadoByEmpleado(emp, cal);
+		if(ue == null) { // no existe en la bd
+			Usuario_Estado nuevoRegistro = new Usuario_Estado();
+			nuevoRegistro.setEmpleado(emp);
+			nuevoRegistro.setJornada(jor);
+			nuevoRegistro.setEstado(est);
+			nuevoRegistro.setCalendario(cal);
+			return getRepositorio().save(nuevoRegistro);
+		}
+		else {
+			ue.setEstado(est);
+			ue.setJornada(jor);
+			return getRepositorio().save(ue);
+		}
+		
+	}
+	
+	public Usuario_Estado save(Usuario_Estado ue) {
+		return getRepositorio().save(ue);
 	}
 
+	public void delete(Usuario_Estado ue) {
+		getRepositorio().delete(ue);
+	}
+	
 }

@@ -1,3 +1,9 @@
+var empleados = [];
+var jornadas = [];
+var estados = [];
+var calendarios = [];
+var usuarioEstados = [];
+
 class Estado {
     constructor(id, descripcion, tipo) {
         this.id = id;
@@ -41,7 +47,8 @@ class Calendario {
 }
 
 class Usuario_estados {
-    constructor(empleado, estado, calendario, jornada) {
+    constructor(id, empleado, estado, calendario, jornada) {
+        this.id = id;
         this.empleado = empleado;
         this.estado = estado;
         this.calendario = calendario;
@@ -53,7 +60,8 @@ class Registro {
     constructor(idEmpleado, idJornada, idEstado, idCalendario) {
         this.idEmpleado = idEmpleado;
         this.idJornada = idJornada;
-        idEstado = idCalendario;
+        this.idEstado = idEstado;
+        this.idCalendario = idCalendario;
     }
 }
 
@@ -80,7 +88,9 @@ function grabarDatos(url, dato) {
 }
 
 function cargarEstados() {
-    obtenerDatos("/estados").then(function(estados) {
+    obtenerDatos("/estados").then(function(listaEstados) {
+
+        estados = estados.concat(listaEstados)
 
         var componente = document.querySelector("#estados");
 
@@ -95,7 +105,9 @@ function cargarEstados() {
 }
 
 function cargarEmpleados() {
-    obtenerDatos("/api/empleados").then(function(empleados) {
+    obtenerDatos("/api/empleados").then(function(listaEmpleados) {
+
+        empleados = empleados.concat(listaEmpleados)
 
         var componente = document.querySelector("#empleados");
 
@@ -110,7 +122,9 @@ function cargarEmpleados() {
 }
 
 function cargarJornadas() {
-    obtenerDatos("/api/jornada").then(function(jornadas) {
+    obtenerDatos("/api/jornada").then(function(listaJornadas) {
+
+        jornadas = jornadas.concat(listaJornadas)
 
         var componente = document.querySelector("#jornadas");
 
@@ -125,7 +139,9 @@ function cargarJornadas() {
 }
 
 function cargarCalendarios() {
-    obtenerDatos("/api/calendario/").then(function(calendarios) {
+    obtenerDatos("/api/calendario/").then(function(listaCalendarios) {
+
+        calendarios = calendarios.concat(listaCalendarios)
 
         var componente = document.querySelector("#calendarios");
 
@@ -139,62 +155,142 @@ function cargarCalendarios() {
     })
 }
 
+function modificarBt(empleado, jornada, estado, fecha) {
+
+    var componente = document.querySelector("#empleados")
+
+    // console.log(componente.options[0].text)
+
+    var selected = componente.options.selectedIndex = 1;
+
+    console.log(selected);
+}
+
+function borrarBt(idRegistro) {
+    console.log(idRegistro)
+}
+
+function addLineaATabla(idRegistro, nombre, apellidos, jornadaDesc, estadoDesc, fecha) {
+    var componente = document.querySelector("#mi-table");
+
+    var tr = document.createElement("tr");
+
+    var tdUsuario = document.createElement("td");
+    tdUsuario.appendChild(document.createTextNode(`${apellidos}, ${nombre}`))
+    tr.appendChild(tdUsuario)
+
+    var tdJornada = document.createElement("td");
+    tdJornada.appendChild(document.createTextNode(jornadaDesc))
+    tr.appendChild(tdJornada);
+
+    var tdEstado = document.createElement("td");
+    tdEstado.appendChild(document.createTextNode(estadoDesc))
+    tr.appendChild(tdEstado)
+
+    var tdCalendario = document.createElement("td");
+    tdCalendario.appendChild(document.createTextNode(fecha))
+    tr.appendChild(tdCalendario)
+
+    var tdBotones = document.createElement("td");
+    tdBotones.id = "mi-td";
+
+    var btModificar = document.createElement("button")
+    btModificar.type = "button";
+    btModificar.classList.add("btn")
+    btModificar.classList.add("btn-primary")
+    btModificar.textContent = "Modificar"
+    btModificar.value = idRegistro;
+    btModificar.onclick = function() {
+        muestraDatosCargados();
+        modificarBt(`${apellidos}, ${nombre}`, jornadaDesc, estadoDesc, fecha);
+    }
+    tdBotones.appendChild(btModificar)
+
+    var btBorrar = document.createElement("button")
+    btBorrar.type = "button"
+    btBorrar.classList.add("btn")
+    btBorrar.classList.add("btn-danger")
+    btBorrar.textContent = "Borrar"
+    btBorrar.value = idRegistro;
+    btBorrar.onclick = function() {
+        borrarBt(idRegistro);
+    }
+    tdBotones.appendChild(btBorrar)
+
+    tr.appendChild(tdBotones);
+
+    componente.appendChild(tr);
+}
+
 function cargarUsuarioEstados() {
     obtenerDatos("/api/cuadrante").then(function(lineaCuadrante) {
 
-        var componente = document.querySelector("#mi-table");
+        usuarioEstados = usuarioEstados.concat(lineaCuadrante);
 
-        lineaCuadrante.forEach(x => {
-            var tr = document.createElement("tr");
-
-            var tdUsuario = document.createElement("td");
-            tdUsuario.appendChild(document.createTextNode(`${x.empleado.apellidos}, ${x.empleado.nombre}`))
-            tr.appendChild(tdUsuario)
-
-            var tdJornada = document.createElement("td");
-            tdJornada.appendChild(document.createTextNode(x.jornada.descripcion))
-            tr.appendChild(tdJornada);
-
-            var tdEstado = document.createElement("td");
-            tdEstado.appendChild(document.createTextNode(x.estado.descripcion))
-            tr.appendChild(tdEstado)
-
-            var tdCalendario = document.createElement("td");
-            tdCalendario.appendChild(document.createTextNode(x.calendario.fecha))
-            tr.appendChild(tdCalendario)
-
-            componente.appendChild(tr);
+        usuarioEstados.forEach(x => {
+            addLineaATabla(
+                x.id,
+                x.empleado.nombre,
+                x.empleado.apellidos,
+                x.jornada.descripcion,
+                x.estado.descripcion,
+                x.calendario.fecha)
         })
 
     })
 }
 
-function guardarRegistro() {
-    alert("HACEMOS COSAS")
-
+function guardarRegistro(id = 0) {
     var listaEmpleados = document.getElementById("empleados")
     var empleadoSelected = listaEmpleados.options[listaEmpleados.selectedIndex].value;
-    console.log(empleadoSelected)
 
     var listaEstados = document.getElementById("estados")
     var estadoSelected = listaEstados.options[listaEstados.selectedIndex].value;
-    console.log(estadoSelected)
 
     var listaJornadas = document.getElementById("jornadas")
     var jornadaSelected = listaJornadas.options[listaJornadas.selectedIndex].value;
-    console.log(jornadaSelected)
 
     var listaCalendarios = document.getElementById("calendarios")
     var calendarioSelected = listaCalendarios.options[listaCalendarios.selectedIndex].value;
-    console.log(calendarioSelected)
 
+    if (calendarioSelected !== "empty" &&
+        empleadoSelected !== "empty" &&
+        jornadaSelected !== "empty" &&
+        estadoSelected !== "empty") {
+        var registro = new Registro(empleadoSelected, jornadaSelected, estadoSelected, calendarioSelected)
+
+        grabarDatos("api/cuadrante/guardar-registro", registro).then(function(x) {
+
+            if (x.id == 0) {
+                alert("El registro no se ha guardado")
+            } else {
+                addLineaATabla(
+                    x.id,
+                    x.empleado.nombre,
+                    x.empleado.apellidos,
+                    x.jornada.descripcion,
+                    x.estado.descripcion,
+                    x.calendario.fecha)
+            }
+        })
+    } else {
+        alert("Por favor selecciona correctamente todos los campos")
+    }
 
 }
 
 window.onload = function() {
-    cargarEstados();
     cargarEmpleados();
     cargarJornadas();
+    cargarEstados();
     cargarCalendarios();
     cargarUsuarioEstados();
+}
+
+function muestraDatosCargados() {
+    console.log(empleados)
+    console.log(jornadas)
+    console.log(estados)
+    console.log(calendarios)
+    console.log(usuarioEstados)
 }

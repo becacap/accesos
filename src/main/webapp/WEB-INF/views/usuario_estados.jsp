@@ -26,17 +26,13 @@
                 <th>JORNADA</th>
                 <th>ESTADO</th>
                 <th>CALENDARIO</th>
-                <!--
-                <td id="mi-td">
-                    <button type="button" class="btn btn-primary">Modificar</button>
-                    <button type="button" class="btn btn-danger">Borrar</button>
-                </td>
-                -->
             </tr>
         </table>
 
         <div class="jumbotron-fluid" id="mi-jumbotron">
             <h2>Nueva asignacion</h2>
+
+            <input type="hidden" name="0" id="modificarOrnot">
             <select name="empleado" id="empleados">
                 <option value="empty">Selecciona empleado...</option>
             </select>
@@ -49,7 +45,7 @@
             <select name="calendario" id="calendarios"> 
                 <option value="empty">Selecciona calendario...</option>
             </select>
-            <button type="button" class="btn btn-success" onclick="guardarRegistro()">Guardar asignacion</button>
+            <button type="button" class="btn btn-success" onclick="guardarRegistro()" value="0" id="bt-guardar">Guardar asignacion</button>
         </div>
     </div>
 </body>

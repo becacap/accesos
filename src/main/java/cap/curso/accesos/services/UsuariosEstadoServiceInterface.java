@@ -16,4 +16,8 @@ public interface UsuariosEstadoServiceInterface {
 	
 	public Usuario_Estado save(RegistroDto registro);
 	
+	public Usuario_Estado save(Usuario_Estado ue);
+	
+	public void delete(Usuario_Estado ue);
+	
 }
