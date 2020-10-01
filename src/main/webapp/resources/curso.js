@@ -1,112 +1,9 @@
 
-var paises = ["españa", "francia", "alemania"];
-
-class Animal {
-    constructor(nombre, sonido) {
-        this.nombre = nombre;
-        this.sonido = sonido;
-    }
-
-    emitirSonido() {
-        console.log("el " + this.nombre + " emite el sonido " + this.sonido);
-    }
-}
-
-
-
-
-class Perro extends Animal {
-
-    constructor(nombre, sonido, raza) {
-        super(nombre, sonido);
-        this.raza = raza;
-    }
-
-    getNombre() {
-        return this.nombre;
-    }
-
-    verPerro() {
-        console.log("El perro es de raza    " + this.raza);
-    }
-}
-
-function ver(valor = "pepe") {
-    console.log(valor);
-
-
-}
-
-var saludar = () => {
-
-
-
-
-    var estado = new Estado(0, "nuevo estado desde javascript", 1);
-    console.log(JSON.stringify(estado))
-    grabarDatos("api/estados", estado).then(function (estado) {
-
-        if (estado.id == 0)
-            alert("el dato no se ha grabado")
-
-    })
-
-
-    obtenerDatos("estados").then(function (estados) {
-
-
-
-
-
-        var componente = document.querySelector("#estados");
-
-        var optionCabecera = document.createElement("option");
-        optionCabecera.text = "selecciona estado..."
-
-        componente.add(optionCabecera);
-
-        estados.forEach(function (estado) {
-            var option = document.createElement("option");
-            option.text = estado.descripcion;
-            componente.add(option)
-
-        })
-
-        var table = document.createElement("table");
-        table.classList.add("table")
-
-        table.classList.add("table-stripped")
-        //table.border=1;
-        var tr = document.createElement("tr");
-        var td1 = document.createElement("td");
-        var td2 = document.createElement("td");
-        td1.appendChild(document.createTextNode("identificador"));
-        td2.appendChild(document.createTextNode("descripcion"));
-        tr.appendChild(td1)
-        tr.appendChild(td2)
-        table.appendChild(tr);
-        estados.forEach(function (estado, contador) {
-
-            let tr = document.createElement("tr");
-
-            if (contador % 2 == 0)
-                tr.classList.add("text-success");
-            else
-                tr.classList.add("text-danger");
-
-
-            let td1 = document.createElement("td");
-            let td2 = document.createElement("td");
-            td1.appendChild(document.createTextNode(estado.id));
-            td2.appendChild(document.createTextNode(estado.descripcion));
-            tr.appendChild(td1)
-            tr.appendChild(td2)
-            table.appendChild(tr);
-        })
-
-        document.querySelector("#capa").appendChild(table);
-    })
-}
+const urlUsuariosEstados = "api/usuariosEstados"
+const urlEmpleados="api/empleados"
+const urlEstados="estados"
+const urlJornadas="api/jornadas"
+const urlCalendario="api/calendario/2020"
 
 
 function grabarDatos(url, dato) {
@@ -170,7 +67,7 @@ class Estado {
 }
 
 class Calendario {
-    constructor(id, estado, fecha,) {
+    constructor(id, estado, fecha) {
         this.id = id;
         this.estado = estado;
         this.fecha = fecha;
@@ -186,40 +83,153 @@ class UsuariosEstados {
         this.calendario = calendario
     }
 }
+function cargarPagina() {
+    crearTabla()
+    crearSelect()
+    crearBotonGrabar()
+    
+    
+    cargarTabla();
+    cargarSelect(urlEmpleados,"#sEmpleados","empleado","nombre", "apellidos")
+    cargarSelect(urlJornadas,"#sJornadas","jornadas","descripcion")
+    cargarSelect(urlEstados,"#sEstados","estados","descripcion")
+    cargarSelect(urlCalendario,"#sCalendario","calendario","fecha")
+}
 
-function cargaDatos() {
-    obtenerDatos("api/calendario/usuariosEstados").then(function (usuariosEstados) {
-        console.log(usuariosEstados)
-        var tabla = document.querySelector("#tablaUE");
-        usuariosEstados.forEach(function(usuarioEstado){
-            var tr= document.createElement("tr");
-            var td1=document.createElement("td")
-            var td2=document.createElement("td")
-            var td3=document.createElement("td")
-            var td4=document.createElement("td")
-            var td5=document.createElement("td")
-            td1.appendChild(document.createTextNode(`${usuarioEstado.empleado.nombre} ${usuarioEstado.empleado.apellidos}`))
-            td2.appendChild(document.createTextNode(`${usuarioEstado.jornada.descripcion}`))
-            td3.appendChild(document.createTextNode(`${usuarioEstado.estado.descripcion}`))
-            td4.appendChild(document.createTextNode(`${usuarioEstado.calendario.fecha}`))
-            var botonModificar=document.createElement("button")
-            botonModificar.classList.add("bg-success");
-            var botonBorrar= document.createElement("button")
-            botonBorrar.classList.add("bg-danger")
-            td5.appendChild(botonModificar)
-            td5.appendChild(botonBorrar)
+function crearBotonGrabar(){
+    var botonGrabar = document.createElement("button")
+    if (document.querySelector("#botonGrabar") != null)
+        document.querySelector("#botonGrabar").remove
+    botonGrabar.classList.add("button")
+    botonGrabar.classList.add("bg-success")
+    botonGrabar.id = "botonGrabar"
+    botonGrabar.textContent = "GRABAR"
+    botonGrabar.click(grabaActualizaDato())
+    document.querySelector("#capaBoton").appendChild(botonGrabar)
+}
+
+function crearBotonModificar(id,idEmpleado,idJornada,idEstado,idCalendario){
+    var botonModificar = document.createElement("button")
+    botonModificar.classList.add("button")
+    botonModificar.classList.add("bg-success")
+    botonModificar.click(grabaActualizaDato(id,idEmpleado,idJornada,idEstado,idCalendario))
+
+}
+
+function grabaActualizaDato(id,idEmpleado,idJornada,idEstado,idCalendario){
+    document.querySelector("#id").value=id
+    document.querySelector("#sEmpleados").value=idEmpleado
+    document.querySelector("#sEstados").value=idEstado
+    document.querySelector("#sCalendario").value=idCalendario
+    document.querySelector("#sJornadas").value=idJornada
+    
+    
+
+}
+
+function cargarTabla() {
+    obtenerDatos(urlUsuariosEstados).then((datos) => {
+        datos.forEach((usuarioEstados)=>{
+            var tr = document.createElement("tr")
+            var td1 = document.createElement("td")
+            td1.appendChild(document.createTextNode(`${usuarioEstados.empleado.nombre} ${usuarioEstados.empleado.apellidos}`))
+            var td2 = document.createElement("td")
+            td2.appendChild(document.createTextNode(usuarioEstados.jornada.des))
+            var td3 = document.createElement("td")
+            td3.appendChild(document.createTextNode(usuarioEstados.estado.descripcion))
+            var td4 = document.createElement("td")
+            td4.appendChild(document.createTextNode(usuarioEstados.calendario.fecha))
+            var td5 = document.createElement("td")
+            td5.appendChild(crearBotonModificar(usuarioEstados.id,usuarioEstados.empleado.id,usuarioEstados.jornada.id,usuarioEstados.especial.id,usuarioEstados.calendario.id))
             tr.appendChild(td1)
             tr.appendChild(td2)
             tr.appendChild(td3)
             tr.appendChild(td4)
             tr.appendChild(td5)
-            tabla.appendChild(tr)
+
         })
-
     })
+}
 
+function cargarSelect(url,idSelect,texto,...campos)
+{
+    obtenerDatos(url).then((datos)=>{
+
+
+        var sEmpleados=document.querySelector(idSelect)
+        var option= document.createElement("option")
+        option.value=0
+        option.text=`selecciona ${texto}....`
+        sEmpleados.appendChild(option)
+        datos.forEach(dato=>{
+            let option= document.createElement("option")
+            option.value=dato.id
+            var textoCampos=""
+            campos.forEach((campo)=>{
+                textoCampos=textoCampos+dato[campo]+" "
+            })
+            option.text=textoCampos
+            sEmpleados.appendChild(option)
+        })
+    })
+}
+
+function crearTabla() {
+
+    var tabla = document.createElement("table")
+    tabla.id = "tabla"
+    tabla.classList.add("table")
+    var tr = document.createElement("tr")
+    var td1 = document.createElement("td")
+    td1.appendChild(document.createTextNode("EMPLEADO"))
+    var td2 = document.createElement("td")
+    td2.appendChild(document.createTextNode("JORNADA"))
+    var td3 = document.createElement("td")
+    td3.appendChild(document.createTextNode("ESTADO"))
+    var td4 = document.createElement("td")
+    td4.appendChild(document.createTextNode("CALENDARIO"))
+    var td5 = document.createElement("td")
+    td5.appendChild(document.createTextNode("ACCIONES"))
+    tr.appendChild(td1)
+    tr.appendChild(td2)
+    tr.appendChild(td3)
+    tr.appendChild(td4)
+    tr.appendChild(td5)
+    tabla.appendChild(tr)
+    if (document.querySelector("#tabla") != null)
+        document.querySelector("#tabla").remove
+    document.querySelector("#capaTabla").appendChild(tabla)
+}
+
+function crearSelect() {
+
+    var sEmpleados = document.createElement("select");
+    sEmpleados.id = "sEmpleados"
+    var sJornadas = document.createElement("select");
+    sJornadas.id = "sJornadas"
+    var sEstados = document.createElement("select");
+    sEstados.id = "sEstados"
+    var sCalendario = document.createElement("select");
+    sCalendario.id = "sCalendario"
+    if (document.querySelector("#sEmpleados") != null)
+        document.querySelector("#sEmpleados").remove
+    if (document.querySelector("#sJornadas") != null)
+        document.querySelector("#sJornadas").remove
+    if (document.querySelector("#sEstados") != null)
+        document.querySelector("#sEstados").remove
+    if (document.querySelector("#sCalendario") != null)
+        document.querySelector("#sCalendario").remove
+
+    document.querySelector("#capaSelect").appendChild(sEmpleados)
+
+    document.querySelector("#capaSelect").appendChild(sJornadas)
+
+    document.querySelector("#capaSelect").appendChild(sEstados)
+
+    document.querySelector("#capaSelect").appendChild(sCalendario)
 
 }
+
 
 
 

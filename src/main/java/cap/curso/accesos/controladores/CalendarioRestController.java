@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cap.curso.accesos.DTOs.AnyoRequestDto;
 import cap.curso.accesos.entidades.Calendario;
 import cap.curso.accesos.entidades.Estado;
+import cap.curso.accesos.entidades.Usuario_Estado;
 import cap.curso.accesos.exception.CalendarioAlreadyExistsException;
 import cap.curso.accesos.exception.CalendarioNotFoundException;
 import cap.curso.accesos.exception.EstadoNotFoundException;
@@ -20,12 +21,13 @@ import cap.curso.accesos.servicios.CalendarioService;
 import cap.curso.accesos.servicios.CalendarioServiceInterface;
 
 @RestController
-@RequestMapping("/api/calendario")
+@RequestMapping("/api")
 public class CalendarioRestController
 {
 	@Autowired
 	private CalendarioServiceInterface calendarioService;
 
+		
 	public CalendarioServiceInterface getCalendarioService()
 	{
 		return calendarioService;
@@ -36,7 +38,9 @@ public class CalendarioRestController
 		this.calendarioService = calendarioService;
 	}
 	
-	@GetMapping("/usuariosEstados")
+	
+	
+	@GetMapping("/calendarios")
 	public Iterable<Calendario> getUsuariosEstados(){
 		return getCalendarioService().findAll();
 	}
@@ -47,7 +51,7 @@ public class CalendarioRestController
 		return getCalendarioService().findAll();
 	}
 
-	@GetMapping("/all/{anyo}")
+	@GetMapping("/calendario/{anyo}")
 	public Iterable<Calendario> findByAnyo(@PathVariable("anyo") Integer anyo)
 	{
 		try

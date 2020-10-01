@@ -16,6 +16,7 @@ public class PruebasRestController
 	@Autowired
 	private EstadosServiceInterface estadosServiceInterface;
 	@CrossOrigin(origins = "http://localhost:4200")
+	
 	@GetMapping("/estados")
 	public List<Estado> getEstados(){
 		

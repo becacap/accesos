@@ -56,7 +56,7 @@ public class AccesosRestController
 		else return null;
 	}
 	
-	@GetMapping("/jornada")
+	@GetMapping("/jornadas")
 	public List<Jornada> getAllJornadas()
 	{
 		List<Jornada> jornadas = new ArrayList<Jornada>();
@@ -64,7 +64,7 @@ public class AccesosRestController
 		return jornadas;
 	}
 	
-	@GetMapping("/jornadaId/{id}")
+	@GetMapping("/jornada/{id}")
 	public Optional<Jornada> getJornada(@PathVariable int id)
 	{
 		return getJornadaServiceInterface().findById(id);
@@ -93,12 +93,10 @@ public class AccesosRestController
 	@GetMapping("/empleados")
 	public List<Empleado> getAllEmpleados()
 	{
-		List<Empleado> empleados = new ArrayList<Empleado>();
-		empleados = (ArrayList<Empleado>) getJpaEmpleadoSI().findAll();
-		return empleados;
+		return (ArrayList<Empleado>) getJpaEmpleadoSI().findAll();
 	}
 	
-	@GetMapping("/empleados/{id}")
+	@GetMapping("/empleado/{id}")
 	public Optional<Empleado> getEmpleado(@PathVariable int id)
 	{
 		return getJpaEmpleadoSI().findById(id);

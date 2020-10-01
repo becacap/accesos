@@ -1,5 +1,7 @@
 package cap.curso.accesos.controladores;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +36,11 @@ public class CalendarioEmpleadoRestControler
 	@Autowired
 	private EstadosServiceInterface estadosServiceInterface;
 
+	@GetMapping("/usuariosEstados")
+	public Iterable<Usuario_Estado> getUsuariosEstados(){
+		return getCalendarioEmpleadoServiceInterface().findAll();
+	}
+	
 	@GetMapping("/calendario-empleado")
 	public Usuario_Estado getCalendarioEmpleado(@RequestParam("usuario_Estado") Usuario_Estado usuario_Estado)
 	{
