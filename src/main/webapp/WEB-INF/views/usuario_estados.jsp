@@ -21,7 +21,7 @@
         </div>
 
         <table border="1" class="table table-striped table-dark" id="mi-table">
-            <tr>
+            <tr value="init">
                 <th>USUARIO</th>
                 <th>JORNADA</th>
                 <th>ESTADO</th>
@@ -32,7 +32,7 @@
         <div class="jumbotron-fluid" id="mi-jumbotron">
             <h2>Nueva asignacion</h2>
 
-            <input type="hidden" name="0" id="modificarOrnot">
+            <input type="hidden" name="" id="idAModificar" value="-1">
             <select name="empleado" id="empleados">
                 <option value="empty">Selecciona empleado...</option>
             </select>

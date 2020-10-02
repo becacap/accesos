@@ -1,4 +1,4 @@
-package cap.curso.accesos.estado.servicios;
+package cap.curso.accesos.servicios;
 
 import java.util.List;
 
@@ -9,8 +9,9 @@ import cap.curso.accesos.entidades.Estado;
 @Service
 public interface EstadosServiceInterface
 {
-
 	public Estado findByDescripcion(String descripcion);
-	public List<Estado> getEstados();
+
+	public List<Estado> findAll();
+
 	public Estado save(Estado estado);
 }

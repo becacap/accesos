@@ -4,35 +4,32 @@ import java.sql.Date;
 import java.util.GregorianCalendar;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import cap.curso.accesos.entidades.Calendario;
 import cap.curso.accesos.entidades.Empleado;
 import cap.curso.accesos.entidades.Estado;
 import cap.curso.accesos.entidades.Jornada;
-import cap.curso.accesos.entidades.Usuario_Estado;
-import cap.curso.accesos.servicios.CalendarioEmpleadoServiceInterface;
-import cap.curso.accesos.calendario.servicios.CalendarioServiceInterface;
-import cap.curso.accesos.estado.servicios.EstadosServiceInterface;
-import cap.curso.accesos.servicios.JPAEmpleadoServiceInterface;
-import cap.curso.accesos.servicios.JPAJornadaServiceInterface;
+import cap.curso.accesos.entidades.UsuarioEstado;
+import cap.curso.accesos.servicios.CalendarioServiceInterface;
+import cap.curso.accesos.servicios.EmpleadoServiceInterface;
+import cap.curso.accesos.servicios.EstadosServiceInterface;
+import cap.curso.accesos.servicios.JornadasServiceInterface;
+import cap.curso.accesos.servicios.UsuariosEstadoServiceInterface;
 
 @SpringBootTest
 public class TestCalendarioEmpleado
 {
 	
 	@Autowired
-	private CalendarioEmpleadoServiceInterface calendarioEmpleado;
+	private UsuariosEstadoServiceInterface calendarioEmpleado;
 	@Autowired
 	private CalendarioServiceInterface calendario;
 	@Autowired
-	private JPAEmpleadoServiceInterface empleado;
+	private EmpleadoServiceInterface empleado;
 	@Autowired
-	private JPAJornadaServiceInterface jornada;
+	private JornadasServiceInterface jornada;
 	@Autowired
 	private EstadosServiceInterface estado;
 
@@ -66,13 +63,13 @@ public class TestCalendarioEmpleado
 	public void testSaveCalendarioEmpleado()
 	{
 
-		Usuario_Estado usuario_Estado = new Usuario_Estado();
+		UsuarioEstado usuario_Estado = new UsuarioEstado();
 
 		GregorianCalendar gregorianCalendar = new GregorianCalendar(2020, 8, 23);
 		Date fecha = new Date(gregorianCalendar.getTime().getTime());
 
-		Empleado e = empleado.findById(1).get();
-		Jornada j = jornada.findById(1).get();
+		Empleado e = empleado.findById(1);
+		Jornada j = jornada.findById(1);
 		Estado es = estado.findByDescripcion("LABORAL");
 		
 		Calendario calendario = new Calendario();
@@ -98,13 +95,13 @@ public class TestCalendarioEmpleado
 	public void testUpdateCalendarioEmpleado()
 	{
 
-		Usuario_Estado usuario_Estado = new Usuario_Estado();
+		UsuarioEstado usuario_Estado = new UsuarioEstado();
 
 		GregorianCalendar gregorianCalendar = new GregorianCalendar(2020, 8, 23);
 		Date fecha = new Date(gregorianCalendar.getTime().getTime());
 		
-		Empleado e = empleado.findById(1).get();
-		Jornada j = jornada.findById(1).get();
+		Empleado e = empleado.findById(1);
+		Jornada j = jornada.findById(1);
 		
 		// Update estado
 		Estado es = estado.findByDescripcion("FESTIVO");
@@ -130,12 +127,12 @@ public class TestCalendarioEmpleado
 	
 	///////////////////////////////////////////////////////////////////////////////////////////
 
-	public CalendarioEmpleadoServiceInterface getCalendarioEmpleado()
+	public UsuariosEstadoServiceInterface getCalendarioEmpleado()
 	{
 		return calendarioEmpleado;
 	}
 
-	public void setCalendarioEmpleado(CalendarioEmpleadoServiceInterface calendarioEmpleado)
+	public void setCalendarioEmpleado(UsuariosEstadoServiceInterface calendarioEmpleado)
 	{
 		this.calendarioEmpleado = calendarioEmpleado;
 	}
@@ -150,22 +147,22 @@ public class TestCalendarioEmpleado
 		this.calendario = calendario;
 	}
 
-	public JPAEmpleadoServiceInterface getEmpleado()
+	public EmpleadoServiceInterface getEmpleado()
 	{
 		return empleado;
 	}
 
-	public void setEmpleado(JPAEmpleadoServiceInterface empleado)
+	public void setEmpleado(EmpleadoServiceInterface empleado)
 	{
 		this.empleado = empleado;
 	}
 
-	public JPAJornadaServiceInterface getJornada()
+	public JornadasServiceInterface getJornada()
 	{
 		return jornada;
 	}
 
-	public void setJornada(JPAJornadaServiceInterface jornada)
+	public void setJornada(JornadasServiceInterface jornada)
 	{
 		this.jornada = jornada;
 	}

@@ -1,4 +1,4 @@
-package cap.curso.accesos.calendario.repositorios;
+package cap.curso.accesos.repositorios;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

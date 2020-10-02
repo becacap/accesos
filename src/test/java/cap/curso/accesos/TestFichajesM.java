@@ -12,11 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import cap.curso.accesos.entidades.Calendario;
 import cap.curso.accesos.entidades.Empleado;
-import cap.curso.accesos.services.UsuariosEstadoServiceInterface;
-
+import cap.curso.accesos.servicios.UsuariosEstadoServiceInterface;
 import cap.curso.accesos.entidades.Calendario;
 import cap.curso.accesos.entidades.Empleado;
-import cap.curso.accesos.services.UsuariosEstadoServiceInterface;
 
 @SpringBootTest
 public class TestFichajesM

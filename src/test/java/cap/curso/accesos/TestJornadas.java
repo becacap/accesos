@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import cap.curso.accesos.entidades.Jornada;
-import cap.curso.accesos.servicios.JPAJornadaServiceInterface;
+import cap.curso.accesos.servicios.JornadasServiceInterface;
 
 @SpringBootTest
 public class TestJornadas
 {
 
 	@Autowired
-	JPAJornadaServiceInterface jpaJornadaServiceInterface;
+	JornadasServiceInterface jpaJornadaServiceInterface;
 
 	@Test
 	public void testVerJornadas()
@@ -48,19 +48,19 @@ public class TestJornadas
 	@Test
 	public void testFindById()
 	{
-		Optional<Jornada> jornada = getJpaJornadaServiceInterface().findById(1);
+		Jornada jornada = getJpaJornadaServiceInterface().findById(1);
 		
-		System.out.println(jornada.get().getDescripcion());
+		System.out.println(jornada.getDescripcion());
 	}
 	
 	
 
-	public JPAJornadaServiceInterface getJpaJornadaServiceInterface()
+	public JornadasServiceInterface getJpaJornadaServiceInterface()
 	{
 		return jpaJornadaServiceInterface;
 	}
 
-	public void setJpaJornadaServiceInterface(JPAJornadaServiceInterface jpaJornadaServiceInterface)
+	public void setJpaJornadaServiceInterface(JornadasServiceInterface jpaJornadaServiceInterface)
 	{
 		this.jpaJornadaServiceInterface = jpaJornadaServiceInterface;
 	}

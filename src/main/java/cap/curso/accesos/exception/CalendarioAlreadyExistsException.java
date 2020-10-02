@@ -1,4 +1,4 @@
-package cap.curso.accesos.calendario.exception;
+package cap.curso.accesos.exception;
 
 @SuppressWarnings("serial")
 public class CalendarioAlreadyExistsException extends Exception

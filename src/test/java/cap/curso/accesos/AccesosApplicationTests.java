@@ -25,33 +25,31 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import cap.curso.accesos.entidades.Estado;
-import cap.curso.accesos.estado.servicios.EstadosServiceInterface;
-
+import cap.curso.accesos.servicios.EstadosServiceInterface;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class AccesosApplicationTests {
+public class AccesosApplicationTests
+{
 
 	@Autowired
 	private EstadosServiceInterface est;
-	
-	
+
 	public EstadosServiceInterface getEst()
 	{
 		return est;
 	}
-
 
 	public void setEst(EstadosServiceInterface est)
 	{
 		this.est = est;
 	}
 
-
 	@Test
-	public void testJspWithEl() throws Exception {
-		
-		List<Estado> estados= getEst().getEstados();
+	public void testJspWithEl() throws Exception
+	{
+
+		List<Estado> estados = getEst().findAll();
 		System.out.println(estados);
 		System.err.println("hola");
 	}

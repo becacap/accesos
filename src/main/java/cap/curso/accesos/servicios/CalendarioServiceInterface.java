@@ -1,12 +1,12 @@
-package cap.curso.accesos.calendario.servicios;
+package cap.curso.accesos.servicios;
 
 import org.springframework.stereotype.Service;
 
-import cap.curso.accesos.calendario.exception.CalendarioAlreadyExistsException;
-import cap.curso.accesos.calendario.exception.CalendarioNotFoundException;
 import cap.curso.accesos.entidades.Calendario;
 import cap.curso.accesos.entidades.Estado;
-import cap.curso.accesos.estado.exception.EstadoNotFoundException;
+import cap.curso.accesos.exception.CalendarioAlreadyExistsException;
+import cap.curso.accesos.exception.CalendarioNotFoundException;
+import cap.curso.accesos.exception.EstadoNotFoundException;
 
 @Service
 public interface CalendarioServiceInterface

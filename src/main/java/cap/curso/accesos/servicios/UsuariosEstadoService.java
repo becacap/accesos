@@ -1,32 +1,32 @@
-package cap.curso.accesos.services;
+package cap.curso.accesos.servicios;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cap.curso.accesos.DTOs.RegistroDto;
-import cap.curso.accesos.calendario.repositorios.CalendarioRepository;
 import cap.curso.accesos.entidades.Calendario;
 import cap.curso.accesos.entidades.Empleado;
 import cap.curso.accesos.entidades.Estado;
 import cap.curso.accesos.entidades.Jornada;
-import cap.curso.accesos.entidades.Usuario_Estado;
-import cap.curso.accesos.estado.repositorios.EstadosRepository;
+import cap.curso.accesos.entidades.UsuarioEstado;
+import cap.curso.accesos.repositorios.CalendarioRepository;
 import cap.curso.accesos.repositorios.EmpleadoRepositoryInterface;
-import cap.curso.accesos.repositorios.JornadaRepositoryInterface;
-import cap.curso.accesos.repositorios.UsuariosEstadoRepositoryInterface;
+import cap.curso.accesos.repositorios.EstadosRepository;
+import cap.curso.accesos.repositorios.JornadaRepository;
+import cap.curso.accesos.repositorios.UsuariosEstadosRepository;
 
 @Service
 public class UsuariosEstadoService implements UsuariosEstadoServiceInterface
 {
 
 	@Autowired
-	private UsuariosEstadoRepositoryInterface repositorio;
+	private UsuariosEstadosRepository usuariosEstadosRepository;
 
 	@Autowired
 	private EmpleadoRepositoryInterface empleadosRepository;
 
 	@Autowired
-	private JornadaRepositoryInterface jornadaRepository;
+	private JornadaRepository jornadaRepository;
 
 	@Autowired
 	private EstadosRepository estadoRepository;
@@ -34,14 +34,14 @@ public class UsuariosEstadoService implements UsuariosEstadoServiceInterface
 	@Autowired
 	private CalendarioRepository calendarioRepository;
 
-	public UsuariosEstadoRepositoryInterface getRepositorio()
+	public UsuariosEstadosRepository getUsuariosEstadosRepository()
 	{
-		return repositorio;
+		return usuariosEstadosRepository;
 	}
 
-	public void setRepositorio(UsuariosEstadoRepositoryInterface repositorio)
+	public void setUsuariosEstadosRepository(UsuariosEstadosRepository usuariosEstadosRepository)
 	{
-		this.repositorio = repositorio;
+		this.usuariosEstadosRepository = usuariosEstadosRepository;
 	}
 
 	public EmpleadoRepositoryInterface getEmpleadosRepository()
@@ -54,12 +54,12 @@ public class UsuariosEstadoService implements UsuariosEstadoServiceInterface
 		this.empleadosRepository = empleadosRepository;
 	}
 
-	public JornadaRepositoryInterface getJornadaRepository()
+	public JornadaRepository getJornadaRepository()
 	{
 		return jornadaRepository;
 	}
 
-	public void setJornadaRepository(JornadaRepositoryInterface jornadaRepository)
+	public void setJornadaRepository(JornadaRepository jornadaRepository)
 	{
 		this.jornadaRepository = jornadaRepository;
 	}
@@ -84,48 +84,54 @@ public class UsuariosEstadoService implements UsuariosEstadoServiceInterface
 		this.calendarioRepository = calendarioRepository;
 	}
 
-	public Usuario_Estado getDiasTrabajadosEmpleadoByYearByMes(Empleado empleado, Calendario cal)
+	public Iterable<UsuarioEstado> findAll()
 	{
-		Usuario_Estado ue = getRepositorio().getUsuarioEstadoByEmpleado(empleado, cal);
-
-		return null;
+		return getUsuariosEstadosRepository().findAll();
 	}
 
-	public Iterable<Usuario_Estado> findAll()
+	public UsuarioEstado findById(Integer id)
 	{
-		return getRepositorio().findAll();
+		return getUsuariosEstadosRepository().findById(id).orElse(null);
 	}
 
-	public Usuario_Estado save(RegistroDto registro)
+	public UsuarioEstado save(RegistroDto registro)
 	{
 		Empleado emp = getEmpleadosRepository().findById(registro.getIdEmpleado()).orElse(null);
 		Jornada jor = getJornadaRepository().findById(registro.getIdJornada()).orElse(null);
 		Estado est = getEstadoRepository().findById(registro.getIdEstado()).orElse(null);
 		Calendario cal = getCalendarioRepository().findById(registro.getIdCalendario()).orElse(null);
-		
-		Usuario_Estado ue = getRepositorio().getUsuarioEstadoByEmpleado(emp, cal);
-		if(ue == null) { // no existe en la bd
-			Usuario_Estado nuevoRegistro = new Usuario_Estado();
+
+		UsuarioEstado ue = getUsuariosEstadosRepository().getUsuarioEstadoByEmpleado(emp, cal);
+		if (ue == null)
+		{ // no existe en la bd
+			UsuarioEstado nuevoRegistro = new UsuarioEstado();
 			nuevoRegistro.setEmpleado(emp);
 			nuevoRegistro.setJornada(jor);
 			nuevoRegistro.setEstado(est);
 			nuevoRegistro.setCalendario(cal);
-			return getRepositorio().save(nuevoRegistro);
-		}
-		else {
+			return getUsuariosEstadosRepository().save(nuevoRegistro);
+		} else
+		{
 			ue.setEstado(est);
 			ue.setJornada(jor);
-			return getRepositorio().save(ue);
+			return getUsuariosEstadosRepository().save(ue);
 		}
-		
-	}
-	
-	public Usuario_Estado save(Usuario_Estado ue) {
-		return getRepositorio().save(ue);
+
 	}
 
-	public void delete(Usuario_Estado ue) {
-		getRepositorio().delete(ue);
+	public UsuarioEstado save(UsuarioEstado ue)
+	{
+		return getUsuariosEstadosRepository().save(ue);
 	}
-	
+
+	public void delete(UsuarioEstado ue)
+	{
+		getUsuariosEstadosRepository().delete(ue);
+	}
+
+	public UsuarioEstado getDiasTrabajadosEmpleadoByYearByMes(Empleado empleado, Calendario calendario)
+	{
+		return getUsuariosEstadosRepository().getUsuarioEstadoByEmpleado(empleado, calendario);
+	}
+
 }

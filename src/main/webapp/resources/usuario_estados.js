@@ -94,7 +94,7 @@ function borrarDatos(url, dato) {
 }
 
 function cargarEstados() {
-    obtenerDatos("/estados").then(function(estados) {
+    obtenerDatos("/api/estados/").then(function(estados) {
 
         var componente = document.querySelector("#estados");
 
@@ -109,7 +109,7 @@ function cargarEstados() {
 }
 
 function cargarEmpleados() {
-    obtenerDatos("/api/empleados").then(function(empleados) {
+    obtenerDatos("/api/empleados/").then(function(empleados) {
 
         var componente = document.querySelector("#empleados");
 
@@ -124,7 +124,7 @@ function cargarEmpleados() {
 }
 
 function cargarJornadas() {
-    obtenerDatos("/api/jornada").then(function(jornadas) {
+    obtenerDatos("/api/jornadas/").then(function(jornadas) {
 
         var componente = document.querySelector("#jornadas");
 
@@ -161,7 +161,7 @@ function modificarBt(idEmpleado, idJornada, idEstado, idCalendario) {
 }
 
 function borrarBt(idRegistro) {
-    borrarDatos("/api/cuadrante/borrar-registro", new Usuario_estados(idRegistro)).then(function() {});
+    borrarDatos("/api/usuarios-estados/borrar-registro", new Usuario_estados(idRegistro)).then(function() {});
 }
 
 function addLineaATabla(ue) {
@@ -215,7 +215,7 @@ function addLineaATabla(ue) {
 }
 
 function cargarUsuarioEstados() {
-    obtenerDatos("/api/cuadrante").then(function(usuarioEstados) {
+    obtenerDatos("/api/usuarios-estados/").then(function(usuarioEstados) {
 
         usuarioEstados.forEach(x => {
             addLineaATabla(x)
@@ -251,7 +251,7 @@ function guardarRegistro() {
 
         var registro = new Registro(empleadoSelected, jornadaSelected, estadoSelected, calendarioSelected)
 
-        grabarDatos("api/cuadrante/guardar-registro", registro).then(function(x) {
+        grabarDatos("api/usuarios-estados/guardar-registro", registro).then(function(x) {
 
             if (x.id == 0) {
                 alert("El registro no se ha guardado")
