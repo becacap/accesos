@@ -101,12 +101,8 @@ public class AccesosRestController
 	{
 		return getJpaEmpleadoSI().findById(id);
 	}
-<<<<<<< Updated upstream:src/main/java/cap/curso/accesos/controladores/AccesosRestController.java
-	public JornadaServiceInterface getJornadaServiceInterface()
-=======
 
-	public JPAJornadaServiceInterface getJornadaServiceInterface()
->>>>>>> Stashed changes:src/main/java/cap/curso/accesos/controladores/RestAccesosController.java
+	public JornadaServiceInterface getJornadaServiceInterface()
 	{
 		return jPAJornadaServiceInterface;
 	}
