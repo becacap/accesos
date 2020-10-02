@@ -1,6 +1,7 @@
 package cap.curso.accesos.servicios;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,10 @@ public class EstadosService implements EstadosServiceInterface
 	public Estado save(Estado estado) {
 		
 		return getEstadosRepository().save(estado);
+	}
+	
+	public Optional<Estado> findById(int idEstado) {
+		return getEstadosRepository().findById(idEstado);
 	}
 
 }

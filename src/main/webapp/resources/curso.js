@@ -12,12 +12,11 @@ function grabarDatos(url, dato) {
         var headers = new Headers();
         headers.append("Content-Type", "application/json");
         fetch(url,
-            {
-                "headers": headers,
-                "method": "POST",
-                "body": JSON.stringify(dato)
-            }).then(response => response.json())
-            .then(data => { return resolve(data) });
+        {"headers":headers,
+        "method":"POST",
+        "body":JSON.stringify(dato)
+        }).then(response => response.json())
+  .then(data => {return resolve(data)});
     })
 }
 
@@ -26,44 +25,31 @@ function obtenerDatos(url) {
     return new Promise(function (resolve, reject) {
         var headers = new Headers();
         headers.append("Content-Type", "application/json");
-        fetch(url, { "headers": headers }).then(response => response.json())
-            .then(data => { return resolve(data) });
+        fetch(url,{"headers":headers}).then(response => response.json())
+  .then(data => {return resolve(data)});
     })
 }
 
-class Empleado {
-    constructor(id, nombre, apellidos, dni, identificador, jornada, fecha_alta, fecha_baja) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.dni = dni;
-        this.identificador = identificador;
-        this.jornada = jornada;
-        this.fecha_alta = fecha_alta;
-        this.fecha_baja = fecha_baja;
-    }
+function botonModificar(idUsuarioEstado,idEmpleado,idJornada,idEstado,idCalenario){
+    console.log("Hempos pulsado modificar")
+    varModificar=true;
+    
+    document.getElementById("empleados").value=idEmpleado;
+    document.getElementById("jornadas").value=idJornada;
+    document.getElementById("estados").value=idEstado;
+    document.getElementById("calendarios").value=idCalenario;
 
 }
 
-class Jornada {
-    constructor(id, descripcion, especial, lunes, martes, miercoles, jueves, viernes) {
-        this.id = id;
-        this.descripcion = descripcion;
-        this.especial = especial
-        this.lunes = lunes
-        this.martes = martes
-        this.miercoles = miercoles
-        this.jueves = jueves
-        this.viernes = viernes
-    }
+function registrar(){
+    console.log("Hemos pulsado el boton grabar")
+    grabarDatos("/api/empleados",idEmpleado).then(function(empleado){
+        
+        
+    })
 }
-
-class Estado {
-    constructor(id, descripcion, tipo) {
-        this.id = id;
-        this.descripcion = descripcion;
-        this.tipo = tipo;
-    }
+function botonEliminar(){
+    console.log("Hempos pulsado eliminar")
 }
 
 class Calendario {

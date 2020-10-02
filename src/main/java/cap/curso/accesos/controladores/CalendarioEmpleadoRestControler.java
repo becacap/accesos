@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cap.curso.accesos.entidades.Empleado;
+import cap.curso.accesos.entidades.Estado;
 import cap.curso.accesos.entidades.Jornada;
 import cap.curso.accesos.entidades.Usuario_Estado;
 import cap.curso.accesos.servicios.CalendarioEmpleadoServiceInterface;
@@ -69,7 +70,15 @@ public class CalendarioEmpleadoRestControler
 		return null;
 		
 	}
-
+	
+	
+	@GetMapping("/usuarioEstado")
+	public List<Usuario_Estado> getUsuario_Estado()
+	{
+		return  getCalendarioEmpleadoServiceInterface().findAll();
+	}
+	
+	
 	/*
 	 * @GetMapping("/calendario-empleado/{id}") public Usuario_Estado
 	 * getCalendarioEmpleadoByEmpleadoId(@PathVariable("id") Integer id) {
