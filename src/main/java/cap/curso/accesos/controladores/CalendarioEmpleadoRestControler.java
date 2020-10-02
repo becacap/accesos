@@ -3,6 +3,7 @@ package cap.curso.accesos.controladores;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -79,17 +80,11 @@ public class CalendarioEmpleadoRestControler
 	}
 	
 	
-	/*
-	 * @GetMapping("/calendario-empleado/{id}") public Usuario_Estado
-	 * getCalendarioEmpleadoByEmpleadoId(@PathVariable("id") Integer id) {
-	 * 
-	 * Empleado empleado = jpaEmpleadoServiceInterface.findById(id).get();
-	 * 
-	 * System.out.println(empleado.getNombre());
-	 * 
-	 * 
-	 * return null; }
-	 */
+	
+	@DeleteMapping("/deleteUsuarioEstado/{id}")
+	public void deleteUsuarioEstado(@PathVariable("id") int id) {
+		getCalendarioEmpleadoServiceInterface().deleteById(id);
+	}
 
 	@PostMapping("/calendario-empleado")
 	public Usuario_Estado postUsuario_Estado(@RequestBody Usuario_Estado usuario_Estado)
