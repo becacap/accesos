@@ -42,10 +42,9 @@ public class AccesosRestController
 		
 		return getEstadosServiceInterface().save(estado);
 	}
-	
 
-	@GetMapping("/ejemplo")
-	public Estado home(@RequestParam("descripcion") String descripcion)
+	@GetMapping("/estado")
+	public Estado getEstadoByDesc(@RequestParam("descripcion") String descripcion)
 	{
 		return getEstadosServiceInterface().findByDescripcion(descripcion);
 	}

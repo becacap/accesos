@@ -20,8 +20,20 @@ public class CalendarioEmpleadoService implements CalendarioEmpleadoServiceInter
 		return getCalendarioEmpleadoRepository().save(usuario_Estado);
 
 	}
-	
 
+	
+	public Usuario_Estado findById(Integer id)
+	{
+		return getCalendarioEmpleadoRepository().findById(id).orElse(null);
+	}
+
+	
+	public List<Usuario_Estado> findAll()
+	{
+		return getCalendarioEmpleadoRepository().findAll();
+	}
+///////////////////----------------  GETTER && SETTER   -------------------------
+	
 	public CalendarioEmpleadoRepositoryInterface getCalendarioEmpleadoRepository()
 	{
 		return calendarioEmpleadoRepository;
