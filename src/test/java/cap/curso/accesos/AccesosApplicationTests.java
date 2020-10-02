@@ -16,16 +16,41 @@
 
 package cap.curso.accesos;
 
-import org.junit.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import java.util.List;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import cap.curso.accesos.entidades.Estado;
+import cap.curso.accesos.servicios.EstadosServiceInterface;
 
 @SpringBootTest
-public class AccesosApplicationTests {
+@RunWith(SpringRunner.class)
+public class AccesosApplicationTests
+{
 
-	
+	@Autowired
+	private EstadosServiceInterface est;
+
+	public EstadosServiceInterface getEst()
+	{
+		return est;
+	}
+
+	public void setEst(EstadosServiceInterface est)
+	{
+		this.est = est;
+	}
+
 	@Test
-	public void testJspWithEl() throws Exception {
+	public void testJspWithEl() throws Exception
+	{
+
+		List<Estado> estados = getEst().findAll();
+		System.out.println(estados);
 		System.err.println("hola");
 	}
 

@@ -32,6 +32,11 @@ public class HomeController {
 		return "home";
 	}
 
-	
+	@RequestMapping("/cuadrante")
+	public String usuario_estados(Map<String, Object> model) {
+		return "usuario_estados";
+	}
+
+
 
 }

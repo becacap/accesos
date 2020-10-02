@@ -8,29 +8,25 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import cap.curso.jpa.configuracion.Configuracion;
-import cap.curso.jpa.entidades.Empleado;
-import cap.curso.jpa.entidades.Jornada;
-import cap.curso.jpa.servicios.JPAEmpleadoService;
-import cap.curso.jpa.servicios.JPAEmpleadoServiceInterface;
-import cap.curso.jpa.servicios.JPAJornadaServiceInterface;
+import cap.curso.accesos.entidades.Empleado;
+import cap.curso.accesos.entidades.Jornada;
+import cap.curso.accesos.exception.EmpleadoNotFoundException;
+import cap.curso.accesos.servicios.EmpleadoServiceInterface;
+import cap.curso.accesos.servicios.JornadasServiceInterface;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = Configuracion.class)
+@SpringBootTest
 
 public class TestEmpleado
 {
 
 	@Autowired
-	private JPAEmpleadoServiceInterface jpaEmpleadoSI;
+	private EmpleadoServiceInterface jpaEmpleadoSI;
 
 	@Autowired
-	private JPAJornadaServiceInterface jpaJornadaSI;
+	private JornadasServiceInterface jpaJornadaSI;
 	
 //	@Test
 	public void crearEmpleado(){
@@ -55,13 +51,12 @@ public class TestEmpleado
 	
 //	@Test
 	public void testEmpleadoByID() {
-		Optional<Empleado> e = Optional.ofNullable(new Empleado());
-		e = getJpaEmpleadoSI().findById(1);
-		System.out.println(e.get().getNombre() + "@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		Empleado e = getJpaEmpleadoSI().findById(1);
+		System.out.println(e.getNombre() + "@@@@@@@@@@@@@@@@@@@@@@@@@@");
 	}
 	
 	@Test
-	public void testModificarJornada() {
+	public void testModificarJornada() throws EmpleadoNotFoundException {
 		Jornada jornadaNueva = new Jornada();
 		jornadaNueva.setLunes("9.00-20.00");
 		jornadaNueva.setMartes("9.00-20.00");
@@ -71,20 +66,20 @@ public class TestEmpleado
 		jornadaNueva.setDescripcion("Jornada completa");
 		jpaJornadaSI.save(jornadaNueva);
 		
-		Optional<Empleado> empleado = jpaEmpleadoSI.findById(1);
-		int jornada1_id = empleado.get().getJornada().getId();
-		Empleado empleado1 = jpaEmpleadoSI.modificarJornada(empleado.get(), jornadaNueva);
+		Empleado empleado = getJpaEmpleadoSI().findById(1);
+		int jornada1_id = empleado.getJornada().getId();
+		Empleado empleado1 = getJpaEmpleadoSI().modificarJornada(empleado.getId(), jornadaNueva);
 		
-		assertEquals(empleado.get().getId(), empleado1.getId());
+		assertEquals(empleado.getId(), empleado1.getId());
 		assertNotEquals(jornada1_id, empleado1.getJornada().getId());
 
 	}
 
-	public JPAEmpleadoServiceInterface getJpaEmpleadoSI()
+	public EmpleadoServiceInterface getJpaEmpleadoSI()
 	{
 		return jpaEmpleadoSI;
 	}
-	public void setJpaEmpleadoSI(JPAEmpleadoServiceInterface jpaEmpleadoSI)
+	public void setJpaEmpleadoSI(EmpleadoServiceInterface jpaEmpleadoSI)
 	{
 		this.jpaEmpleadoSI = jpaEmpleadoSI;
 	}

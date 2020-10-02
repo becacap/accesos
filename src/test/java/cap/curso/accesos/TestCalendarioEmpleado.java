@@ -1,125 +1,180 @@
 package cap.curso.accesos;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.sql.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import cap.curso.jpa.configuracion.Configuracion;
-import cap.curso.jpa.entidades.Calendario;
-import cap.curso.jpa.entidades.Empleado;
-import cap.curso.jpa.entidades.Estado;
-import cap.curso.jpa.entidades.Jornada;
-import cap.curso.jpa.entidades.Usuario_Estado;
-import cap.curso.jpa.servicios.CalendarioEmpleadoServiceInterface;
+import cap.curso.accesos.entidades.Calendario;
+import cap.curso.accesos.entidades.Empleado;
+import cap.curso.accesos.entidades.Estado;
+import cap.curso.accesos.entidades.Jornada;
+import cap.curso.accesos.entidades.UsuarioEstado;
+import cap.curso.accesos.servicios.CalendarioServiceInterface;
+import cap.curso.accesos.servicios.EmpleadoServiceInterface;
+import cap.curso.accesos.servicios.EstadosServiceInterface;
+import cap.curso.accesos.servicios.JornadasServiceInterface;
+import cap.curso.accesos.servicios.UsuariosEstadoServiceInterface;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = Configuracion.class)
+@SpringBootTest
 public class TestCalendarioEmpleado
 {
+	
 	@Autowired
-	private CalendarioEmpleadoServiceInterface calendarioEmpleado;
+	private UsuariosEstadoServiceInterface calendarioEmpleado;
+	@Autowired
+	private CalendarioServiceInterface calendario;
+	@Autowired
+	private EmpleadoServiceInterface empleado;
+	@Autowired
+	private JornadasServiceInterface jornada;
+	@Autowired
+	private EstadosServiceInterface estado;
 
+	
+	/*
+	 * Estado estado = new Estado(); estado1.setDescripcion("Festivo");
+	 * estado1.setId(2); estado1.setTipo(1);
+	 */
+
+	/*
+	 * Jornada jornada = new Jornada(); jornada.setLunes("9.00-20.00");
+	 * jornada.setMartes("9.00-20.00"); jornada.setMiercoles("9.00-20.00");
+	 * jornada.setJueves("9.00-20.00"); jornada.setViernes("9.00-20.00");
+	 * jornada.setDescripcion("Jornada completa");
+	 */
+
+	/*
+	 * Empleado empleado = new Empleado(); empleado.setId(3);
+	 * empleado.setNombre("Jorge"); empleado.setApellidos("martin sanchez");
+	 * empleado.setDni("3829393a"); empleado.setFecha_alta(null);
+	 * empleado.setFecha_baja(null); empleado.setIdentificador("pasaporte");
+	 * empleado.setJornada(jornada);
+	 */
+		
+	
+	
+	
+	
+	
 	@Test
-	public void testSave()
+	public void testSaveCalendarioEmpleado()
 	{
-		// enero1 = getCalendario()byYear();
-		// getEmpleadobyId();
 
-		/*
-		 * Usuario_Estado usuario_Estado = new Usuario_Estado();
-		 * usuario_Estado.setEmpleado(empleado);
-		 * 
-		 * for (Calendario calendario : getCalendarioByYear()) {
-		 * usuario_Estado.setCalendario(calendario);
-		 * 
-		 * calendarioEmpleado.save(usuario_Estado); }
-		 */
+		UsuarioEstado usuario_Estado = new UsuarioEstado();
 
-		/*
-		 * GregorianCalendar gregorianCalendar = new GregorianCalendar(2020, 9, 21);
-		 * Date fecha = new Date(gregorianCalendar.getTime().getTime()); Calendario
-		 * calendario = new Calendario(); calendario.setId(1);
-		 * calendario.setFecha(fecha); Estado e1 = new Estado(); Estado e2 = new
-		 * Estado(); Estado e3 = new Estado(); e1.setId(1);
-		 * e1.setDescripcion("Festivo"); e2.setId(2); e2.setDescripcion("Laboral");
-		 * e3.setId(3); e3.setDescripcion("Festivo"); List<Estado> estados = new
-		 * ArrayList<Estado>(); estados.add(e1); estados.add(e2); estados.add(e3);
-		 * getCalendarioEmpleado().save(calendario, estados);
-		 */
+		GregorianCalendar gregorianCalendar = new GregorianCalendar(2020, 8, 23);
+		Date fecha = new Date(gregorianCalendar.getTime().getTime());
+
+		Empleado e = empleado.findById(1);
+		Jornada j = jornada.findById(1);
+		Estado es = estado.findByDescripcion("LABORAL");
+		
+		Calendario calendario = new Calendario();
+		calendario.setId(1);
+		calendario.setFecha(fecha);
+		calendario.setEstado(es);
+	
+		
+		/////////////////////////////////////////////////////////
+		
+		usuario_Estado.setCalendario(calendario);
+		usuario_Estado.setEmpleado(e);
+		usuario_Estado.setEstado(es);
+		usuario_Estado.setJornada(j);
+
+		getCalendarioEmpleado().save(usuario_Estado);
+
 	}
 
-	public CalendarioEmpleadoServiceInterface getCalendarioEmpleado()
+	
+	
+	@Test
+	public void testUpdateCalendarioEmpleado()
+	{
+
+		UsuarioEstado usuario_Estado = new UsuarioEstado();
+
+		GregorianCalendar gregorianCalendar = new GregorianCalendar(2020, 8, 23);
+		Date fecha = new Date(gregorianCalendar.getTime().getTime());
+		
+		Empleado e = empleado.findById(1);
+		Jornada j = jornada.findById(1);
+		
+		// Update estado
+		Estado es = estado.findByDescripcion("FESTIVO");
+		
+		Calendario calendario = new Calendario();
+		calendario.setId(1);
+		calendario.setFecha(fecha);
+		calendario.setEstado(es);
+
+		/////////////////////////////////////////////////////////
+		
+		usuario_Estado.setCalendario(calendario);
+		usuario_Estado.setEmpleado(e);
+		usuario_Estado.setEstado(es);
+		usuario_Estado.setJornada(j);
+
+		getCalendarioEmpleado().save(usuario_Estado);
+		
+	}
+	
+	
+	
+	
+	///////////////////////////////////////////////////////////////////////////////////////////
+
+	public UsuariosEstadoServiceInterface getCalendarioEmpleado()
 	{
 		return calendarioEmpleado;
 	}
 
-	public void setCalendarioEmpleado(CalendarioEmpleadoServiceInterface calendarioEmpleado)
+	public void setCalendarioEmpleado(UsuariosEstadoServiceInterface calendarioEmpleado)
 	{
 		this.calendarioEmpleado = calendarioEmpleado;
 	}
 
-	@Test
-	public void testUpdateEstado()
+	public CalendarioServiceInterface getCalendario()
 	{
-
-		/*
-		 * Calendario calendario = getCalendarioById(); Empleado empleado =
-		 * getEmpleadoById(); Jornada jornada = getJornadaById();
-		 * 
-		 * if (calendario.getEstado().getId() == 1) calendario.getEstado().setId(2);
-		 * else { calendario.getEstado().setId(1); }
-		 * 
-		 * getCalendarioEmpleado().update(calendario.getId(), empleado.getId(),
-		 * jornada.getId(), calendario.getEstado().getId());
-		 */
+		return calendario;
 	}
 
-	@Test
-	public void testUpdateJornada()
+	public void setCalendario(CalendarioServiceInterface calendario)
 	{
-
-		/*
-		 * Calendario calendario = getCalendarioById(); Empleado empleado =
-		 * getEmpleadoById(); Jornada jornada = getJornadaById();
-		 * 
-		 * // Updatear a mano a otra jornada Id
-		 * 
-		 * 
-		 * getCalendarioEmpleado().update(calendario.getId(), empleado.getId(),
-		 * jornada.getId(), calendario.getEstado().getId());
-		 * 
-		 */
+		this.calendario = calendario;
 	}
 
-	/*
-	 * @Test public void testUpdate() {
-	 * 
-	 * GregorianCalendar gregorianCalendar = new GregorianCalendar(2020, 9, 21);
-	 * Date fecha = new Date(gregorianCalendar.getTime().getTime());
-	 * 
-	 * Calendario calendario = new Calendario(); calendario.setId(1);
-	 * calendario.setFecha(fecha);
-	 * 
-	 * Empleado empleado = new Empleado(); empleado.setId(1);
-	 * 
-	 * Jornada jornada = new Jornada(); jornada.setId(1);
-	 * 
-	 * Estado estado = new Estado(); estado.setId(1);
-	 * 
-	 * getCalendarioEmpleado().update(calendario.getId(), empleado.getId(),
-	 * jornada.getId(), estado.getId());
-	 * 
-	 * }
-	 */
+	public EmpleadoServiceInterface getEmpleado()
+	{
+		return empleado;
+	}
+
+	public void setEmpleado(EmpleadoServiceInterface empleado)
+	{
+		this.empleado = empleado;
+	}
+
+	public JornadasServiceInterface getJornada()
+	{
+		return jornada;
+	}
+
+	public void setJornada(JornadasServiceInterface jornada)
+	{
+		this.jornada = jornada;
+	}
+
+	public EstadosServiceInterface getEstado()
+	{
+		return estado;
+	}
+
+	public void setEstado(EstadosServiceInterface estado)
+	{
+		this.estado = estado;
+	}
 
 }

@@ -4,22 +4,18 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import cap.curso.jpa.configuracion.Configuracion;
-import cap.curso.jpa.entidades.Jornada;
-import cap.curso.jpa.servicios.JPAJornadaServiceInterface;
+import cap.curso.accesos.entidades.Jornada;
+import cap.curso.accesos.servicios.JornadasServiceInterface;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = Configuracion.class)
+@SpringBootTest
 public class TestJornadas
 {
 
 	@Autowired
-	JPAJornadaServiceInterface jpaJornadaServiceInterface;
+	JornadasServiceInterface jpaJornadaServiceInterface;
 
 	@Test
 	public void testVerJornadas()
@@ -52,19 +48,19 @@ public class TestJornadas
 	@Test
 	public void testFindById()
 	{
-		Optional<Jornada> jornada = getJpaJornadaServiceInterface().findById(1);
+		Jornada jornada = getJpaJornadaServiceInterface().findById(1);
 		
-		System.out.println(jornada.get().getDescripcion());
+		System.out.println(jornada.getDescripcion());
 	}
 	
 	
 
-	public JPAJornadaServiceInterface getJpaJornadaServiceInterface()
+	public JornadasServiceInterface getJpaJornadaServiceInterface()
 	{
 		return jpaJornadaServiceInterface;
 	}
 
-	public void setJpaJornadaServiceInterface(JPAJornadaServiceInterface jpaJornadaServiceInterface)
+	public void setJpaJornadaServiceInterface(JornadasServiceInterface jpaJornadaServiceInterface)
 	{
 		this.jpaJornadaServiceInterface = jpaJornadaServiceInterface;
 	}
