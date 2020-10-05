@@ -1,5 +1,8 @@
 package cap.curso.accesos.controladores;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +18,7 @@ import cap.curso.accesos.entidades.Empleado;
 import cap.curso.accesos.entidades.Jornada;
 import cap.curso.accesos.entidades.Usuario_Estado;
 import cap.curso.accesos.estado.servicios.EstadosServiceInterface;
+import cap.curso.accesos.services.UsuariosEstadoServiceInterface;
 import cap.curso.accesos.servicios.CalendarioEmpleadoServiceInterface;
 import cap.curso.accesos.servicios.JPAEmpleadoServiceInterface;
 import cap.curso.accesos.servicios.JPAJornadaServiceInterface;
@@ -81,6 +85,14 @@ public class RestCalendarioEmpleadoControler
 	{
 
 		return calendarioEmpleadoServiceInterface.save(usuario_Estado);
+	}
+	
+	@GetMapping("/tabla")
+	public List<Usuario_Estado> getUsuarios_Estados() {
+		List<Usuario_Estado> usuario_estado = new ArrayList<Usuario_Estado> ();
+		usuario_estado = getCalendarioEmpleadoServiceInterface().findAll();
+		System.out.println(usuario_estado);
+		return usuario_estado;
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -19,23 +19,36 @@
 
 <body>
     <div class="container">
-        <h1 class="pepe">EJEMPLO DE SELECTORES</h1>
+        <!-- <h1 class="pepe">EJEMPLO DE SELECTORES</h1>
         <h1>EJEMPLO DE SELECTORES</h1>
         <h1 id="pepe" class="pepe">EJEMPLO DE SELECTORES</h1>
         <h1>EJEMPLO DE SELECTORES</h1>
         <h1 class="pepe">EJEMPLO DE SELECTORES</h1>
         <div>
             <h1>EJEMPLO DE SELECTORES</h1>
+        </div> -->
+
+
+        <button onclick="prueba()">Generar tabla</button>
+
+        
+        
+        <!-- <div id="tablausuariosestados"></div> -->
+        <div id="tabla">
+
         </div>
-
-
-        <button onclick="saludar()">Saludar</button>
-
         <form action="">
-            estados:<select id="estados"></select>
-            <br><input type="date" id="fecha">
-        </form>
-        <div id="capa"></div>
+            Empleados:<select id="empleados"></select>
+            <br>
+            Jornadas:<select id="jornadas"></select>
+            <br>
+            Estados: <select id="estados"></select>
+            <br>
+            Calendarios: <select id="calendarios"></select>
+
+
+        </form>     
+        <button onclick="registrar()">Registrar</button>
     </div>
 </body>
 
