@@ -14,4 +14,6 @@ public interface EstadosServiceInterface
 	public List<Estado> findAll();
 
 	public Estado save(Estado estado);
+	
+	public Iterable<Estado> getEstadosCalendario();
 }

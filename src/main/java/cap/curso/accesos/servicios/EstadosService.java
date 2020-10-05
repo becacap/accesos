@@ -39,5 +39,9 @@ public class EstadosService implements EstadosServiceInterface
 	{
 		return getEstadosRepository().save(estado);
 	}
+	
+	public Iterable<Estado> getEstadosCalendario(){
+		return getEstadosRepository().getEstadosCalendario();
+	}
 
 }

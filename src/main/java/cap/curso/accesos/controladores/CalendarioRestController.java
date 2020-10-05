@@ -3,6 +3,7 @@ package cap.curso.accesos.controladores;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,7 +43,7 @@ public class CalendarioRestController
 		return getCalendarioService().findAll();
 	}
 
-	@GetMapping("/all/{anyo}")
+	@GetMapping("/{anyo}/all")
 	public Iterable<Calendario> findByAnyo(@PathVariable("anyo") Integer anyo)
 	{
 		try
@@ -66,8 +67,8 @@ public class CalendarioRestController
 		}
 	}
 
-	@PostMapping("/actualizar/{dia_id}")
-	public Calendario actualizarDiaEnCalendario(@PathVariable("dia_id") int dia_id, @RequestBody Estado estado)
+	@PostMapping("/actualizar/{calendario}")
+	public Calendario actualizarDiaEnCalendario(@PathVariable("calendario") int dia_id, @RequestBody Estado estado)
 	{
 		try
 		{
@@ -82,6 +83,17 @@ public class CalendarioRestController
 	public Calendario getCalendario(@PathVariable("id") Integer idCalendario)
 	{
 		return getCalendarioService().findById(idCalendario);
+	}
+
+	@DeleteMapping("/delete")
+	public void deleteAll()
+	{
+		getCalendarioService().deleteAll();
+	}
+	
+	@GetMapping("/{anyo}/get-datos")
+	public Iterable<Calendario> getDatos(@PathVariable("anyo") Integer anyo){
+		return getCalendarioService().getDatos(anyo);
 	}
 
 }

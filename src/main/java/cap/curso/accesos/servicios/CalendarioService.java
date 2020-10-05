@@ -52,8 +52,9 @@ public class CalendarioService implements CalendarioServiceInterface
 	{
 		return getCalendarioRepository().findAll();
 	}
-	
-	public Calendario findById(Integer idCalendario) {
+
+	public Calendario findById(Integer idCalendario)
+	{
 		return getCalendarioRepository().findById(idCalendario).orElse(null);
 	}
 
@@ -74,7 +75,7 @@ public class CalendarioService implements CalendarioServiceInterface
 	public Iterable<Calendario> generaCalendarioAnyo(Integer anyo)
 			throws CalendarioAlreadyExistsException, EstadoNotFoundException
 	{
-		Iterable<Calendario> diasAnyo = getCalendarioRepository().findByAnyo(anyo.toString());
+		Iterable<Calendario> diasAnyo = getCalendarioRepository().findByAnyo(anyo);
 
 		// System.out.println("-----> HE BUSCADO POR AÑO");
 
@@ -137,10 +138,6 @@ public class CalendarioService implements CalendarioServiceInterface
 
 	public Calendario updateCalendarioEstado(Integer idCalendario, Estado estado) throws CalendarioNotFoundException
 	{
-		// el metodo get() devuelve la excepcion NoSuchElementException y nosotros
-		// queremos devolver null
-		// Calendario calendarioSearched =
-		// getCalendarioRepository().findById(idCalendario).get();
 		Calendario calendarioSearched = getCalendarioRepository().findById(idCalendario).orElse(null);
 
 		if (calendarioSearched != null)
@@ -155,7 +152,7 @@ public class CalendarioService implements CalendarioServiceInterface
 
 	public Iterable<Calendario> findByAnyo(Integer anyo) throws CalendarioNotFoundException
 	{
-		Iterable<Calendario> diasAnyo = getCalendarioRepository().findByAnyo(anyo.toString());
+		Iterable<Calendario> diasAnyo = getCalendarioRepository().findByAnyo(anyo);
 
 		Iterator<Calendario> it = diasAnyo.iterator();
 		if (!it.hasNext()) // si la lista de dias no esta vacia, no se genera calendario
@@ -164,6 +161,23 @@ public class CalendarioService implements CalendarioServiceInterface
 		}
 
 		return diasAnyo;
+	}
+
+	public void deleteAll()
+	{
+		getCalendarioRepository().deleteAll();
+	}
+
+	public Iterable<Calendario> getDatos(Integer anyo)
+	{
+		Iterable<Calendario> lista = getCalendarioRepository().findByAnyo(anyo);
+
+		for (Calendario c : lista)
+		{
+			
+		}
+
+		return null;
 	}
 
 }

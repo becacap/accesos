@@ -14,4 +14,7 @@ public interface EstadosRepository extends CrudRepository<Estado, Integer>
 	@Query("from Estado e where e.descripcion = :descripcion")
 	public Estado findByDescripcion(@Param("descripcion") String descripcion);
 
+	@Query("from Estado e where e.tipo = 1")
+	public Iterable<Estado> getEstadosCalendario();
+	
 }

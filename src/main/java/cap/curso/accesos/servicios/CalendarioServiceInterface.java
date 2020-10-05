@@ -13,7 +13,7 @@ public interface CalendarioServiceInterface
 {
 
 	public Iterable<Calendario> findAll();
-	
+
 	public Calendario findById(Integer idCalendario);
 
 	public Calendario save(Calendario calendario) throws CalendarioAlreadyExistsException;
@@ -24,5 +24,9 @@ public interface CalendarioServiceInterface
 	public Calendario updateCalendarioEstado(Integer idCalendario, Estado estado) throws CalendarioNotFoundException;
 
 	public Iterable<Calendario> findByAnyo(Integer anyo) throws CalendarioNotFoundException;
+
+	public void deleteAll();
+
+	public Iterable<Calendario> getDatos(Integer anyo);
 
 }

@@ -40,5 +40,10 @@ public class EstadosRestController
 	{
 		return getEstadosServiceInterface().save(estado);
 	}
+	
+	@GetMapping("/estados-calendario")
+	public Iterable<Estado> getEstadosCalendario(){
+		return getEstadosServiceInterface().getEstadosCalendario();
+	}
 
 }

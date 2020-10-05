@@ -12,8 +12,6 @@ public interface CalendarioRepository extends CrudRepository<Calendario, Integer
 {
 
 	@Query(value = "select * from calendarios c where extract(YEAR from c.fecha) = :anyo", nativeQuery = true)
-	public Iterable<Calendario> findByAnyo(@Param("anyo") String anyo);
-
-	// "from Calendario c where SubString(cast(c.fecha as text),1,4) = :anyo"
-	// "select * from calendarios c where extract(YEAR from c.fecha) = :anyo"
+	public Iterable<Calendario> findByAnyo(@Param("anyo") Integer anyo);
+	
 }
