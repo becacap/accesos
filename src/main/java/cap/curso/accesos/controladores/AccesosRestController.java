@@ -27,6 +27,7 @@ import cap.curso.accesos.servicios.JornadaServiceInterface;
 @RequestMapping("/api")
 public class AccesosRestController
 {
+	
 	@Autowired
 	private EstadosServiceInterface estadosServiceInterface;
 
@@ -50,12 +51,14 @@ public class AccesosRestController
 		return getEstadosServiceInterface().findByDescripcion(descripcion);
 	}
 	
-	@GetMapping("/add-jornada")
+	@CrossOrigin(origins="http://localhost:4200")
+	@PostMapping("/add-jornada")
 	public Jornada introducirJornada(@RequestBody Jornada jornada) {
 		if(jornada.getId() == 0) return getJornadaServiceInterface().save(jornada);
 		else return null;
 	}
 	
+	@CrossOrigin(origins="http://localhost:4200")
 	@GetMapping("/jornadas")
 	public List<Jornada> getAllJornadas()
 	{
@@ -80,6 +83,7 @@ public class AccesosRestController
 		return empleado;
 	}
 
+    @CrossOrigin(origins="http://localhost:4200")
 	@GetMapping("/modificarEmpleados")
 	public Empleado modificarEmpleado(@RequestBody Empleado empleado)
 	{
@@ -90,6 +94,7 @@ public class AccesosRestController
 		
 		return empleado;
 	}
+    @CrossOrigin(origins="http://localhost:4200")
 	@GetMapping("/empleados")
 	public List<Empleado> getAllEmpleados()
 	{
