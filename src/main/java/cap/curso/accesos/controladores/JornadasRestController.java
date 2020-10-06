@@ -43,7 +43,7 @@ public class JornadasRestController
 		return getJornadasService().findById(id);
 	}
 
-	@PostMapping("/nueva-jornada")
+	@PostMapping("/nueva")
 	public Jornada nuevaJornada(@RequestBody Jornada jornada)
 	{
 		return getJornadasService().save(jornada);
