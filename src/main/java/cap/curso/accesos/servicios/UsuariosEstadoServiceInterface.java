@@ -10,19 +10,21 @@ import cap.curso.accesos.entidades.Empleado;
 import cap.curso.accesos.entidades.UsuarioEstado;
 
 @Service
-public interface UsuariosEstadoServiceInterface {
-	
+public interface UsuariosEstadoServiceInterface
+{
+
 	public Iterable<UsuarioEstado> findAll();
-	
+
 	public UsuarioEstado findById(Integer id);
-	
+
 	public UsuarioEstado save(RegistroDto registro);
-	
+
 	public UsuarioEstado save(UsuarioEstado ue);
-	
+
 	public void delete(UsuarioEstado ue);
 
-	public UsuarioEstado getDiasTrabajadosEmpleadoByYearByMes (Empleado empleado, Calendario calendario);
+	public UsuarioEstado getDiasTrabajadosEmpleadoByYearByMes(Empleado empleado, Calendario calendario);
 
-	public List<UsuarioEstado> getCalendarioEmpleado(Integer idEmpleado, Integer anyo);
+	public List<UsuarioEstado> getCalendarioEmpleado(Integer empleado_id, Integer year);
+
 }

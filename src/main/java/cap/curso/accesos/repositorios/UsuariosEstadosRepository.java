@@ -1,7 +1,10 @@
 package cap.curso.accesos.repositorios;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import cap.curso.accesos.entidades.Calendario;
@@ -13,4 +16,8 @@ public interface UsuariosEstadosRepository extends CrudRepository<UsuarioEstado,
 {
 	@Query("from UsuarioEstado ue where ue.empleado=:empleado and ue.calendario=:calendario")
 	public UsuarioEstado getUsuarioEstadoByEmpleado(Empleado empleado, Calendario calendario);
+
+	@Query(value = "SELECT * FROM Usuarios_Estados WHERE empleados_id=:empleado AND calendarios_id IN (SELECT calendarios_id FROM calendarios WHERE year(fecha)=:year)", nativeQuery = true)
+	List<UsuarioEstado> getCalendarioEmpleado(@Param("empleado") Integer empleado, @Param("year") Integer year);
+
 }

@@ -24,10 +24,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import cap.curso.accesos.entidades.Acceso;
 import cap.curso.accesos.entidades.Estado;
 import cap.curso.accesos.servicios.EstadosServiceInterface;
-import cap.curso.accesos.servicios.AccesosServiceInterface;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)

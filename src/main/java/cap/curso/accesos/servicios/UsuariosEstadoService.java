@@ -12,7 +12,7 @@ import cap.curso.accesos.entidades.Estado;
 import cap.curso.accesos.entidades.Jornada;
 import cap.curso.accesos.entidades.UsuarioEstado;
 import cap.curso.accesos.repositorios.CalendarioRepository;
-import cap.curso.accesos.repositorios.EmpleadoRepositoryInterface;
+import cap.curso.accesos.repositorios.EmpleadoRepository;
 import cap.curso.accesos.repositorios.EstadosRepository;
 import cap.curso.accesos.repositorios.JornadaRepository;
 import cap.curso.accesos.repositorios.UsuariosEstadosRepository;
@@ -25,7 +25,7 @@ public class UsuariosEstadoService implements UsuariosEstadoServiceInterface
 	private UsuariosEstadosRepository usuariosEstadosRepository;
 
 	@Autowired
-	private EmpleadoRepositoryInterface empleadosRepository;
+	private EmpleadoRepository empleadosRepository;
 
 	@Autowired
 	private JornadaRepository jornadaRepository;
@@ -46,12 +46,12 @@ public class UsuariosEstadoService implements UsuariosEstadoServiceInterface
 		this.usuariosEstadosRepository = usuariosEstadosRepository;
 	}
 
-	public EmpleadoRepositoryInterface getEmpleadosRepository()
+	public EmpleadoRepository getEmpleadosRepository()
 	{
 		return empleadosRepository;
 	}
 
-	public void setEmpleadosRepository(EmpleadoRepositoryInterface empleadosRepository)
+	public void setEmpleadosRepository(EmpleadoRepository empleadosRepository)
 	{
 		this.empleadosRepository = empleadosRepository;
 	}
@@ -136,9 +136,9 @@ public class UsuariosEstadoService implements UsuariosEstadoServiceInterface
 		return getUsuariosEstadosRepository().getUsuarioEstadoByEmpleado(empleado, calendario);
 	}
 
-	public List<UsuarioEstado> getCalendarioEmpleado(Integer idEmpleado, Integer anyo)
+	public List<UsuarioEstado> getCalendarioEmpleado(Integer empleado_id, Integer year)
 	{
-		return null;
+		return getUsuariosEstadosRepository().getCalendarioEmpleado(empleado_id, year);
 	}
 
 }

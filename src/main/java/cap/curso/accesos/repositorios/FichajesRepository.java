@@ -11,5 +11,5 @@ import cap.curso.accesos.entidades.Empleado;
 public interface FichajesRepository extends CrudRepository<Acceso, Integer>
 {
 	@Query("from Acceso a where a.empleado=:empleado and a.year=:anyo and a.month=:mes order by fecha, hora")
-	public Iterable<Acceso> getFichajesByMes(Empleado empleado, int anyo,int mes);
+	public Iterable<Acceso> getFichajesByMes(Empleado empleado, int anyo, int mes);
 }

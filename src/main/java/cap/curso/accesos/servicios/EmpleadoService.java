@@ -6,20 +6,20 @@ import org.springframework.stereotype.Service;
 import cap.curso.accesos.entidades.Empleado;
 import cap.curso.accesos.entidades.Jornada;
 import cap.curso.accesos.exception.EmpleadoNotFoundException;
-import cap.curso.accesos.repositorios.EmpleadoRepositoryInterface;
+import cap.curso.accesos.repositorios.EmpleadoRepository;
 
 @Service
 public class EmpleadoService implements EmpleadoServiceInterface
 {
 	@Autowired
-	private EmpleadoRepositoryInterface empleadoRepo;
+	private EmpleadoRepository empleadoRepo;
 
-	public EmpleadoRepositoryInterface getEmpleadoRepo()
+	public EmpleadoRepository getEmpleadoRepo()
 	{
 		return empleadoRepo;
 	}
 
-	public void setEmpleadoRepo(EmpleadoRepositoryInterface empleadoRepo)
+	public void setEmpleadoRepo(EmpleadoRepository empleadoRepo)
 	{
 		this.empleadoRepo = empleadoRepo;
 	}

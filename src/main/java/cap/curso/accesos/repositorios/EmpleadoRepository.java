@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import cap.curso.accesos.entidades.Empleado;
 
 @Repository
-public interface EmpleadoRepositoryInterface extends CrudRepository<Empleado, Integer>
+public interface EmpleadoRepository extends CrudRepository<Empleado, Integer>
 {
 	
 }
