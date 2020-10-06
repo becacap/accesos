@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cap.curso.accesos.entidades.Estado;
 import cap.curso.accesos.servicios.EstadosServiceInterface;
+import cap.curso.accesos.utilidades.CalendarioUtilidades;
 
 @RestController
 public class PruebasRestController
@@ -16,10 +17,9 @@ public class PruebasRestController
 	@Autowired
 	private EstadosServiceInterface estadosServiceInterface;
 	@CrossOrigin(origins = "http://localhost:4200")
-	
-	@GetMapping("/estados")
+	@GetMapping("/verEstados")
 	public List<Estado> getEstados(){
-		
+		CalendarioUtilidades.getValoresFecha(28, 9, 2020);
 		return getEstadosServiceInterface().getEstados();
 	}
 	public EstadosServiceInterface getEstadosServiceInterface()
