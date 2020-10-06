@@ -17,12 +17,12 @@ import cap.curso.accesos.servicios.UsuariosEstadoServiceInterface;
 
 @RestController
 @RequestMapping("/api/usuarios-estados")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UsuariosEstadosRestController
 {
 
 	@Autowired
 	private UsuariosEstadoServiceInterface usuariosEstadosService;
-	
 
 	public UsuariosEstadoServiceInterface getUsuariosEstadosService()
 	{
@@ -35,35 +35,32 @@ public class UsuariosEstadosRestController
 	}
 
 	@GetMapping("/")
-	@CrossOrigin(origins = "http://localhost:4200")
 	public Iterable<UsuarioEstado> getCuadrante()
 	{
 		return getUsuariosEstadosService().findAll();
 	}
 
 	@GetMapping("/{id}")
-	@CrossOrigin(origins = "http://localhost:4200")
 	public UsuarioEstado getCalendarioEmpleadoById(@PathVariable("id") Integer id)
 	{
 		return getUsuariosEstadosService().findById(id);
 	}
 
 	@PostMapping("/guardar-registro")
-	@CrossOrigin(origins = "http://localhost:4200")
 	public UsuarioEstado guardar(@RequestBody RegistroDto registro)
 	{
 		return getUsuariosEstadosService().save(registro);
 	}
 
 	@PostMapping("/borrar-registro")
-	@CrossOrigin(origins = "http://localhost:4200")
 	public void delete(@RequestBody UsuarioEstado ue)
 	{
 		getUsuariosEstadosService().delete(ue);
 	}
-	
+
 	@GetMapping("/calendario/{empleadoId}/{anyo}")
-	public List<UsuarioEstado> getCalendarioEmpleadoByIdAndYear(@PathVariable("empleadoId") Integer idEmpleado, @PathVariable("anyo") Integer anyo)
+	public List<UsuarioEstado> getCalendarioEmpleadoByIdAndYear(@PathVariable("empleadoId") Integer idEmpleado,
+			@PathVariable("anyo") Integer anyo)
 	{
 		return getUsuariosEstadosService().getCalendarioEmpleado(idEmpleado, anyo);
 	}

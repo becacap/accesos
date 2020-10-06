@@ -3,6 +3,7 @@ package cap.curso.accesos.controladores;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import cap.curso.accesos.servicios.EstadosServiceInterface;
 
 @RestController
 @RequestMapping("/api/estados")
+@CrossOrigin(origins = "http://localhost:4200")
 public class EstadosRestController
 {
 	@Autowired
@@ -40,9 +42,10 @@ public class EstadosRestController
 	{
 		return getEstadosServiceInterface().save(estado);
 	}
-	
+
 	@GetMapping("/estados-calendario")
-	public Iterable<Estado> getEstadosCalendario(){
+	public Iterable<Estado> getEstadosCalendario()
+	{
 		return getEstadosServiceInterface().getEstadosCalendario();
 	}
 
