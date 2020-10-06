@@ -90,10 +90,5 @@ public class CalendarioRestController
 	{
 		getCalendarioService().deleteAll();
 	}
-	
-	@GetMapping("/{anyo}/get-datos")
-	public Iterable<Calendario> getDatos(@PathVariable("anyo") Integer anyo){
-		return getCalendarioService().getDatos(anyo);
-	}
 
 }

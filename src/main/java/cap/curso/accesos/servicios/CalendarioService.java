@@ -168,16 +168,4 @@ public class CalendarioService implements CalendarioServiceInterface
 		getCalendarioRepository().deleteAll();
 	}
 
-	public Iterable<Calendario> getDatos(Integer anyo)
-	{
-		Iterable<Calendario> lista = getCalendarioRepository().findByAnyo(anyo);
-
-		for (Calendario c : lista)
-		{
-			
-		}
-
-		return null;
-	}
-
 }

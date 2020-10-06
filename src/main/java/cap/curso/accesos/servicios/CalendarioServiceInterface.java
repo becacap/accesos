@@ -27,6 +27,4 @@ public interface CalendarioServiceInterface
 
 	public void deleteAll();
 
-	public Iterable<Calendario> getDatos(Integer anyo);
-
 }
