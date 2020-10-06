@@ -1,5 +1,7 @@
 package cap.curso.accesos.servicios;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import cap.curso.accesos.DTOs.RegistroDto;
@@ -21,4 +23,6 @@ public interface UsuariosEstadoServiceInterface {
 	public void delete(UsuarioEstado ue);
 
 	public UsuarioEstado getDiasTrabajadosEmpleadoByYearByMes (Empleado empleado, Calendario calendario);
+	
+	public List<UsuarioEstado> getCalendarioEmpleado(Integer empleado_id, Integer year);
 }

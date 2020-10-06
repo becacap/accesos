@@ -1,5 +1,7 @@
 package cap.curso.accesos.controladores;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,6 +55,12 @@ public class UsuariosEstadosRestController
 	public void delete(@RequestBody UsuarioEstado ue)
 	{
 		getUsuariosEstadosService().delete(ue);
+	}
+	
+	@GetMapping("/calendario/{empleadoId}/{anyo}")
+	public List<UsuarioEstado> getCalendarioEmpleadoByIdAndYear(@PathVariable("empleadoId") Integer idEmpleado, @PathVariable("anyo") Integer anyo)
+	{
+		return getUsuariosEstadosService().getCalendarioEmpleado(idEmpleado, anyo);
 	}
 
 }

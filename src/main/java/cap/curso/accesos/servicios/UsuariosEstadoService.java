@@ -1,5 +1,7 @@
 package cap.curso.accesos.servicios;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -132,6 +134,13 @@ public class UsuariosEstadoService implements UsuariosEstadoServiceInterface
 	public UsuarioEstado getDiasTrabajadosEmpleadoByYearByMes(Empleado empleado, Calendario calendario)
 	{
 		return getUsuariosEstadosRepository().getUsuarioEstadoByEmpleado(empleado, calendario);
+	}
+
+	@Override
+	public List<UsuarioEstado> getCalendarioEmpleado(Integer empleado_id, Integer year)
+	{
+		// TODO Auto-generated method stub
+		return getUsuariosEstadosRepository().getCalendarioEmpleado(empleado_id, year);
 	}
 
 }
