@@ -16,16 +16,12 @@
 
 package cap.curso.accesos.controladores;
 
-import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import cap.curso.accesos.entidades.Acceso;
-import cap.curso.accesos.servicios.FichajesServiceInterface;
+import org.springframework.stereotype.Controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HomeController {
@@ -43,25 +39,9 @@ public class HomeController {
 		return "usuario_estados";
 	}
 
-	
-	@Autowired
-	private FichajesServiceInterface fichajesServiceInterface;
-
-	public FichajesServiceInterface getFichajesServiceInterface()
-	{
-		return fichajesServiceInterface;
-	}
-
-	public void setFichajesServiceInterface(FichajesServiceInterface fichajesServiceInterface)
-	{
-		this.fichajesServiceInterface = fichajesServiceInterface;
-	}
-
-	@GetMapping("/fichajes")
-	public List<Acceso> getAccesos()
-	{
-		System.out.println(getFichajesServiceInterface().findAll());
-		return (List<Acceso>) getFichajesServiceInterface().findAll();
+	@RequestMapping("/fichajes")
+	public String acceso(Map<String, Object> model) {
+		return "acceso";
 	}
 
 
