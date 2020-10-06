@@ -4,26 +4,26 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cap.curso.accesos.entidades.Acceso;
-import cap.curso.accesos.entidades.Estado;
-import cap.curso.accesos.servicios.FichajesServiceInterface;
+import cap.curso.accesos.servicios.AccesosServiceInterface;
 
 @RestController
-@RequestMapping("/api/fichajes")
-public class FichajesRestController
+@RequestMapping("/api/accesos")
+public class AccesosRestController
 {
 	@Autowired
-	private FichajesServiceInterface fichajesServiceInterface;
+	private AccesosServiceInterface fichajesServiceInterface;
 
-	public FichajesServiceInterface getFichajesServiceInterface()
+	public AccesosServiceInterface getFichajesServiceInterface()
 	{
 		return fichajesServiceInterface;
 	}
 
-	public void setFichajesServiceInterface(FichajesServiceInterface fichajesServiceInterface)
+	public void setFichajesServiceInterface(AccesosServiceInterface fichajesServiceInterface)
 	{
 		this.fichajesServiceInterface = fichajesServiceInterface;
 	}
@@ -33,6 +33,11 @@ public class FichajesRestController
 	{
 		return (List<Acceso>) getFichajesServiceInterface().findAll();
 	}
-	
-	
+
+	@GetMapping("/{id}")
+	public Acceso findById(@PathVariable("id") Integer idFichaje)
+	{
+		return getFichajesServiceInterface().findById(idFichaje);
+	}
+
 }

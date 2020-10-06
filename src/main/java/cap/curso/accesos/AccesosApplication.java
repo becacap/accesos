@@ -16,27 +16,23 @@
 
 package cap.curso.accesos;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-import cap.curso.accesos.entidades.Acceso;
-import cap.curso.accesos.servicios.FichajesServiceInterface;
-
 @SpringBootApplication
-public class AccesosApplication extends SpringBootServletInitializer {
+public class AccesosApplication extends SpringBootServletInitializer
+{
 
 	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application)
+	{
 		return application.sources(AccesosApplication.class);
 	}
 
-	public static void main(String[] args) throws Exception {
-		
+	public static void main(String[] args) throws Exception
+	{
 		SpringApplication.run(AccesosApplication.class, args);
 	}
 

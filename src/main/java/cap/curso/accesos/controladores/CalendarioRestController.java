@@ -3,6 +3,7 @@ package cap.curso.accesos.controladores;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,12 +39,14 @@ public class CalendarioRestController
 	}
 
 	@GetMapping("/")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public Iterable<Calendario> findAll()
 	{
 		return getCalendarioService().findAll();
 	}
 
 	@GetMapping("/{anyo}/all")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public Iterable<Calendario> findByAnyo(@PathVariable("anyo") Integer anyo)
 	{
 		try
@@ -56,6 +59,7 @@ public class CalendarioRestController
 	}
 
 	@PostMapping("/generar")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public Iterable<Calendario> generaCalendario(@RequestBody(required = true) AnyoRequestDto anyo)
 	{
 		try
@@ -68,6 +72,7 @@ public class CalendarioRestController
 	}
 
 	@PostMapping("/actualizar/{calendario}")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public Calendario actualizarDiaEnCalendario(@PathVariable("calendario") int dia_id, @RequestBody Estado estado)
 	{
 		try
@@ -80,12 +85,14 @@ public class CalendarioRestController
 	}
 
 	@GetMapping("/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public Calendario getCalendario(@PathVariable("id") Integer idCalendario)
 	{
 		return getCalendarioService().findById(idCalendario);
 	}
 
 	@DeleteMapping("/delete")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public void deleteAll()
 	{
 		getCalendarioService().deleteAll();
