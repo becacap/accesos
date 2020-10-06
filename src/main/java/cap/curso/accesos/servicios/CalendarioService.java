@@ -6,10 +6,13 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cap.curso.accesos.DTOs.DatosDiaDto;
+import cap.curso.accesos.DTOs.DatosMesDto;
 import cap.curso.accesos.entidades.Calendario;
 import cap.curso.accesos.entidades.Estado;
 import cap.curso.accesos.exception.CalendarioAlreadyExistsException;
@@ -166,6 +169,48 @@ public class CalendarioService implements CalendarioServiceInterface
 	public void deleteAll()
 	{
 		getCalendarioRepository().deleteAll();
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public List<DatosMesDto> getDatosYear(int year)
+	{
+		List<Calendario> calendarios = (List<Calendario>) getCalendarioRepository().findByAnyo(year);
+		List<DatosMesDto> datos = new ArrayList<DatosMesDto>();
+		for (int i = 0; i < 12; i++)
+		{
+			GregorianCalendar dia1 = new GregorianCalendar(year, i, 1);
+			DatosMesDto datosMesDto = new DatosMesDto();
+			datosMesDto.setNombreMes(dia1.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()));
+			datosMesDto.setMes(i);
+			datosMesDto.setDatosDias(new ArrayList<DatosDiaDto>());
+			for (Calendario calendario : calendarios)
+			{
+				if (calendario.getFecha().getMonth() == i + 1)
+				{
+					Date fechaBD = calendario.getFecha();
+					GregorianCalendar fecha = new GregorianCalendar();
+					fecha.setTimeInMillis(fechaBD.getTime());
+					fecha.setMinimalDaysInFirstWeek(4);
+					fecha.setFirstDayOfWeek(4);
+					DatosDiaDto datosDiaDto = new DatosDiaDto();
+					datosDiaDto.setEstado(calendario.getEstado().getId());
+					datosDiaDto.setDia(fecha.get(Calendar.DAY_OF_MONTH));
+					int diaSemana = fecha.get(Calendar.DAY_OF_WEEK);
+					int diaSemanaTemp = 7;
+					if (diaSemana < 8)
+						diaSemanaTemp = diaSemana - 1;
+					datosDiaDto.setDiaSemana(diaSemanaTemp);
+					datosDiaDto.setSemanaMes(fecha.get(Calendar.WEEK_OF_MONTH) - 1);
+					datosMesDto.getDatosDias().add(datosDiaDto);
+				}
+
+			}
+			datos.add(datosMesDto);
+
+		}
+		return datos;
+
 	}
 
 }

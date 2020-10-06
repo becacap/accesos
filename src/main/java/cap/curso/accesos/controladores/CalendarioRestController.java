@@ -1,6 +1,7 @@
 package cap.curso.accesos.controladores;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cap.curso.accesos.DTOs.AnyoRequestDto;
+import cap.curso.accesos.DTOs.DatosMesDto;
 import cap.curso.accesos.entidades.Calendario;
 import cap.curso.accesos.entidades.Estado;
 import cap.curso.accesos.exception.CalendarioAlreadyExistsException;
@@ -91,6 +93,12 @@ public class CalendarioRestController
 	public void deleteAll()
 	{
 		getCalendarioService().deleteAll();
+	}
+
+	@GetMapping("/{year}/datos")
+	public List<DatosMesDto> getDatosYear(@PathVariable("year") int year)
+	{
+		return getCalendarioService().getDatosYear(year);
 	}
 
 }

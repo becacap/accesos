@@ -1,7 +1,10 @@
 package cap.curso.accesos.servicios;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import cap.curso.accesos.DTOs.DatosMesDto;
 import cap.curso.accesos.entidades.Calendario;
 import cap.curso.accesos.entidades.Estado;
 import cap.curso.accesos.exception.CalendarioAlreadyExistsException;
@@ -26,5 +29,7 @@ public interface CalendarioServiceInterface
 	public Iterable<Calendario> findByAnyo(Integer anyo) throws CalendarioNotFoundException;
 
 	public void deleteAll();
+
+	List<DatosMesDto> getDatosYear(int year);
 
 }

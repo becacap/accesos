@@ -8,6 +8,12 @@ import java.awt.HeadlessException;
 public class Prueba extends Frame
 {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	public Prueba() throws HeadlessException
 	{
 		super();
