@@ -24,8 +24,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import cap.curso.accesos.entidades.Acceso;
 import cap.curso.accesos.entidades.Estado;
 import cap.curso.accesos.servicios.EstadosServiceInterface;
+import cap.curso.accesos.servicios.FichajesServiceInterface;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -34,6 +36,8 @@ public class AccesosApplicationTests
 
 	@Autowired
 	private EstadosServiceInterface est;
+	
+	
 
 	public EstadosServiceInterface getEst()
 	{
@@ -53,5 +57,7 @@ public class AccesosApplicationTests
 		System.out.println(estados);
 		System.err.println("hola");
 	}
+	
+	
 
 }

@@ -21,4 +21,6 @@ public interface UsuariosEstadoServiceInterface {
 	public void delete(UsuarioEstado ue);
 
 	public UsuarioEstado getDiasTrabajadosEmpleadoByYearByMes (Empleado empleado, Calendario calendario);
+	
+	//public void generarAccesos(int year);
 }

@@ -4,14 +4,16 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
+import cap.curso.accesos.entidades.Acceso;
 import cap.curso.accesos.entidades.Calendario;
 import cap.curso.accesos.entidades.Empleado;
+import cap.curso.accesos.servicios.FichajesServiceInterface;
 import cap.curso.accesos.servicios.UsuariosEstadoServiceInterface;
 import cap.curso.accesos.entidades.Calendario;
 import cap.curso.accesos.entidades.Empleado;
@@ -47,6 +49,16 @@ public class TestFichajesM
 		Calendario calendario = new Calendario();
 		calendario.setFecha(new Date(01, 22, 2016));
 		assertNull(usuariosEstadoService.getDiasTrabajadosEmpleadoByYearByMes(empleado,calendario));
+	}
+	
+	
+	
+	
+	@Test
+	public void test() throws Exception
+	{
+
+		
 	}
 
 }
