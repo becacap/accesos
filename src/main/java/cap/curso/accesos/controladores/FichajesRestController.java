@@ -28,7 +28,7 @@ public class FichajesRestController
 		this.fichajesServiceInterface = fichajesServiceInterface;
 	}
 
-	@GetMapping("/fichajes")
+	@GetMapping("/")
 	public List<Acceso> getAccesos()
 	{
 		return (List<Acceso>) getFichajesServiceInterface().findAll();
