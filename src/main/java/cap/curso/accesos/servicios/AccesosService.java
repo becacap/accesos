@@ -5,21 +5,21 @@ import org.springframework.stereotype.Service;
 
 import cap.curso.accesos.entidades.Acceso;
 import cap.curso.accesos.entidades.Empleado;
-import cap.curso.accesos.repositorios.FichajesRepository;
+import cap.curso.accesos.repositorios.AccesosRepository;
 
 @Service
 public class AccesosService implements AccesosServiceInterface
 {
 
 	@Autowired
-	private FichajesRepository fichajesRepo;
+	private AccesosRepository fichajesRepo;
 
-	public FichajesRepository getFichajesRepo()
+	public AccesosRepository getFichajesRepo()
 	{
 		return fichajesRepo;
 	}
 
-	public void setFichajesRepo(FichajesRepository fichajesRepo)
+	public void setFichajesRepo(AccesosRepository fichajesRepo)
 	{
 		this.fichajesRepo = fichajesRepo;
 	}
