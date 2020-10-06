@@ -50,10 +50,9 @@ public class AccesosRestController
 	}
 	
 	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping("/add-jornada")
+	@PostMapping("/add-jornada")
 	public Jornada introducirJornada(@RequestBody Jornada jornada) {
-		if(jornada.getId() == 0) return getJornadaServiceInterface().save(jornada);
-		else return null;
+		 return getJornadaServiceInterface().save(jornada);
 	}
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/jornadas")
