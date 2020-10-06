@@ -48,6 +48,7 @@ public class AccesosRestController
 	{
 		return getEstadosServiceInterface().findByDescripcion(descripcion);
 	}
+	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/add-jornada")
 	public Jornada introducirJornada(@RequestBody Jornada jornada) {
