@@ -21,30 +21,6 @@ public class CalendarioEmpleadoService implements CalendarioEmpleadoServiceInter
 
 	}
 
-	
-	public Usuario_Estado findById(Integer id)
-	{
-		return getCalendarioEmpleadoRepository().findById(id).orElse(null);
-	}
-
-	
-	public List<Usuario_Estado> findAll()
-	{
-		return getCalendarioEmpleadoRepository().findAll();
-	}
-///////////////////----------------  GETTER && SETTER   -------------------------
-	
-	public CalendarioEmpleadoRepositoryInterface getCalendarioEmpleadoRepository()
-	{
-		return calendarioEmpleadoRepository;
-	}
-
-	public void setCalendarioEmpleadoRepository(CalendarioEmpleadoRepositoryInterface calendarioEmpleadoRepository)
-	{
-		this.calendarioEmpleadoRepository = calendarioEmpleadoRepository;
-	}
-
-
 	@Override
 	public Usuario_Estado findById(Integer id)
 	{
@@ -57,6 +33,17 @@ public class CalendarioEmpleadoService implements CalendarioEmpleadoServiceInter
 	{
 		// TODO Auto-generated method stub
 		return (List<Usuario_Estado>) getCalendarioEmpleadoRepository().findAll();
+	}
+///////////////////----------------  GETTER && SETTER   -------------------------
+	
+	public CalendarioEmpleadoRepositoryInterface getCalendarioEmpleadoRepository()
+	{
+		return calendarioEmpleadoRepository;
+	}
+
+	public void setCalendarioEmpleadoRepository(CalendarioEmpleadoRepositoryInterface calendarioEmpleadoRepository)
+	{
+		this.calendarioEmpleadoRepository = calendarioEmpleadoRepository;
 	}
 
 

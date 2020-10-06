@@ -42,19 +42,19 @@ public class AccesosRestController
 		
 		return getEstadosServiceInterface().save(estado);
 	}
-
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/estado")
 	public Estado getEstadoByDesc(@RequestParam("descripcion") String descripcion)
 	{
 		return getEstadosServiceInterface().findByDescripcion(descripcion);
 	}
-	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/add-jornada")
 	public Jornada introducirJornada(@RequestBody Jornada jornada) {
 		if(jornada.getId() == 0) return getJornadaServiceInterface().save(jornada);
 		else return null;
 	}
-	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/jornadas")
 	public List<Jornada> getAllJornadas()
 	{
@@ -62,13 +62,13 @@ public class AccesosRestController
 		jornadas = (ArrayList<Jornada>) getJornadaServiceInterface().findAll();
 		return jornadas;
 	}
-	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/jornada/{id}")
 	public Optional<Jornada> getJornada(@PathVariable int id)
 	{
 		return getJornadaServiceInterface().findById(id);
 	}
-	
+	@CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/modificarJornada")
 	public Empleado modificarJornada(@RequestBody Empleado empleado)
 	{
@@ -100,12 +100,8 @@ public class AccesosRestController
 	{
 		return getJpaEmpleadoSI().findById(id);
 	}
-<<<<<<< Updated upstream:src/main/java/cap/curso/accesos/controladores/AccesosRestController.java
 	public JornadaServiceInterface getJornadaServiceInterface()
-=======
 
-	public JPAJornadaServiceInterface getJornadaServiceInterface()
->>>>>>> Stashed changes:src/main/java/cap/curso/accesos/controladores/RestAccesosController.java
 	{
 		return jPAJornadaServiceInterface;
 	}
