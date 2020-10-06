@@ -35,7 +35,7 @@ public class Acceso
 	
 	@Column
 	private int hora;
-	
+ 
 	@Column
 	private int tipo;
 	
