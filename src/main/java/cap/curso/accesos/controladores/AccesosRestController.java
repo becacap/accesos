@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import cap.curso.accesos.DTOs.DatosMesDto;
 import cap.curso.accesos.entidades.Empleado;
 import cap.curso.accesos.entidades.Estado;
 import cap.curso.accesos.entidades.Jornada;
 import cap.curso.accesos.servicios.EstadosServiceInterface;
+import cap.curso.accesos.servicios.CalendarioServiceInterface;
 import cap.curso.accesos.servicios.EmpleadoServiceInterface;
 import cap.curso.accesos.servicios.JornadaServiceInterface;
 
@@ -36,6 +38,19 @@ public class AccesosRestController
 	@Autowired
 	private EmpleadoServiceInterface jpaEmpleadoSI;
 	
+	@Autowired
+	private CalendarioServiceInterface calendarioServiceInterface;
+	
+	public CalendarioServiceInterface getCalendarioServiceInterface()
+	{
+		return calendarioServiceInterface;
+	}
+
+	public void setCalendarioServiceInterface(CalendarioServiceInterface calendarioServiceInterface)
+	{
+		this.calendarioServiceInterface = calendarioServiceInterface;
+	}
+
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value="/estados")
 	public Estado grabaEstado(@RequestBody Estado estado) {
@@ -43,6 +58,12 @@ public class AccesosRestController
 		return getEstadosServiceInterface().save(estado);
 	}
 	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping("/pintar/calendario/{year}")
+	public List<DatosMesDto> getDatosYear(@PathVariable("year") int year)
+	{
+		return getCalendarioServiceInterface().getDatosYear(year);
+	}
 
 	@GetMapping("/ejemplo")
 	public Estado home(@RequestParam("descripcion") String descripcion)
@@ -55,7 +76,7 @@ public class AccesosRestController
 		if(jornada.getId() == 0) return getJornadaServiceInterface().save(jornada);
 		else return null;
 	}
-	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/jornadas")
 	public List<Jornada> getAllJornadas()
 	{
