@@ -16,4 +16,6 @@ public interface EstadosServiceInterface
 	public Estado save(Estado estado);
 	
 	public Iterable<Estado> getEstadosCalendario();
+
+	public Estado findById(Integer id);
 }

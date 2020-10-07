@@ -21,6 +21,9 @@ public class Estado
 	
 	@Column
 	private int tipo;
+	
+	@Column
+	private String color;
 
 	public int getTipo()
 	{
@@ -50,6 +53,16 @@ public class Estado
 	public void setDescripcion(String descripcion)
 	{
 		this.descripcion = descripcion;
+	}
+
+	public String getColor()
+	{
+		return color;
+	}
+
+	public void setColor(String color)
+	{
+		this.color = color;
 	}
 	
 	

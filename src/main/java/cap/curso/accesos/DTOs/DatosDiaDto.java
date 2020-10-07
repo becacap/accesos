@@ -8,14 +8,18 @@ public class DatosDiaDto
 	private int dia;
 	private int estado;
 	private int jornada;
+	private int idCalendario;
+	private String colorActual;
 
-	public DatosDiaDto(int diaSemana, int semanaMes, int dia, int estado, int jornada)
+	public DatosDiaDto(int idCalendario, int diaSemana, int semanaMes, int dia, int estado, int jornada, String color)
 	{
+		this.setIdCalendario(idCalendario);
 		this.diaSemana = diaSemana;
 		this.semanaMes = semanaMes;
 		this.dia = dia;
 		this.estado = estado;
 		this.jornada = jornada;
+		this.setColorActual(color);
 	}
 
 	public int getEstado()
@@ -66,6 +70,26 @@ public class DatosDiaDto
 	public void setDia(int dia)
 	{
 		this.dia = dia;
+	}
+
+	public int getIdCalendario()
+	{
+		return idCalendario;
+	}
+
+	public void setIdCalendario(int idCalendario)
+	{
+		this.idCalendario = idCalendario;
+	}
+
+	public String getColorActual()
+	{
+		return colorActual;
+	}
+
+	public void setColorActual(String colorActual)
+	{
+		this.colorActual = colorActual;
 	}
 
 }

@@ -44,4 +44,10 @@ public class EstadosService implements EstadosServiceInterface
 		return getEstadosRepository().getEstadosCalendario();
 	}
 
+	@Override
+	public Estado findById(Integer id)
+	{
+		return getEstadosRepository().findById(id).orElse(null);
+	}
+
 }
