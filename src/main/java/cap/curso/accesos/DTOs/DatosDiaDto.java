@@ -9,6 +9,15 @@ public class DatosDiaDto
 	private int estado;
 	private int jornada;
 
+	public DatosDiaDto(int diaSemana, int semanaMes, int dia, int estado, int jornada)
+	{
+		this.diaSemana = diaSemana;
+		this.semanaMes = semanaMes;
+		this.dia = dia;
+		this.estado = estado;
+		this.jornada = jornada;
+	}
+
 	public int getEstado()
 	{
 		return estado;

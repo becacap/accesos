@@ -171,51 +171,79 @@ public class CalendarioService implements CalendarioServiceInterface
 		getCalendarioRepository().deleteAll();
 	}
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public List<DatosMesDto> getDatosYear(int year)
-	{
-		List<Calendario> calendarios = (List<Calendario>) getCalendarioRepository().findByAnyo(year);
-		List<DatosMesDto> datos = new ArrayList<DatosMesDto>();
-		for (int i = 0; i < 12; i++)
-		{
-			GregorianCalendar dia1 = new GregorianCalendar(year, i, 1);
-			DatosMesDto datosMesDto = new DatosMesDto();
-			datosMesDto.setNombreMes(dia1.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()));
-			datosMesDto.setMes(i);
-			datosMesDto.setDatosDias(new ArrayList<DatosDiaDto>());
-			for (Calendario calendario : calendarios)
-			{
-				if (calendario.getFecha().getMonth() == i + 1)
-				{
-					Date fechaBD = calendario.getFecha();
-					GregorianCalendar fecha = new GregorianCalendar();
-					fecha.setTimeInMillis(fechaBD.getTime());
-					fecha.setMinimalDaysInFirstWeek(4);
-					fecha.setFirstDayOfWeek(4);
-					DatosDiaDto datosDiaDto = new DatosDiaDto();
-					datosDiaDto.setEstado(calendario.getEstado().getId());
-					datosDiaDto.setDia(fecha.get(Calendar.DAY_OF_MONTH));
-					int diaSemana = fecha.get(Calendar.DAY_OF_WEEK);
-					int diaSemanaTemp = 7;
-					if (diaSemana < 8)
-						diaSemanaTemp = diaSemana - 1;
-					datosDiaDto.setDiaSemana(diaSemanaTemp);
-					datosDiaDto.setSemanaMes(fecha.get(Calendar.WEEK_OF_MONTH) - 1);
-					datosMesDto.getDatosDias().add(datosDiaDto);
-				}
-
-			}
-			datos.add(datosMesDto);
-
-		}
-		return datos;
-
-	}
+	/*
+	 * @SuppressWarnings("deprecation")
+	 * 
+	 * @Override public List<DatosMesDto> getDatosYear(int year) { List<Calendario>
+	 * calendarios = (List<Calendario>) getCalendarioRepository().findByAnyo(year);
+	 * List<DatosMesDto> datos = new ArrayList<DatosMesDto>(); for (int i = 0; i <
+	 * 12; i++) { GregorianCalendar dia1 = new GregorianCalendar(year, i, 1);
+	 * DatosMesDto datosMesDto = new DatosMesDto();
+	 * datosMesDto.setNombreMes(dia1.getDisplayName(Calendar.MONTH, Calendar.LONG,
+	 * Locale.getDefault())); datosMesDto.setMes(i); datosMesDto.setDatosDias(new
+	 * ArrayList<DatosDiaDto>()); for (Calendario calendario : calendarios) { if
+	 * (calendario.getFecha().getMonth() == i + 1) { Date fechaBD =
+	 * calendario.getFecha(); GregorianCalendar fecha = new GregorianCalendar();
+	 * fecha.setTimeInMillis(fechaBD.getTime()); fecha.setMinimalDaysInFirstWeek(4);
+	 * fecha.setFirstDayOfWeek(4); DatosDiaDto datosDiaDto = new DatosDiaDto();
+	 * datosDiaDto.setEstado(calendario.getEstado().getId());
+	 * datosDiaDto.setDia(fecha.get(Calendar.DAY_OF_MONTH)); int diaSemana =
+	 * fecha.get(Calendar.DAY_OF_WEEK); int diaSemanaTemp = 7; if (diaSemana < 8)
+	 * diaSemanaTemp = diaSemana - 1; datosDiaDto.setDiaSemana(diaSemanaTemp);
+	 * datosDiaDto.setSemanaMes(fecha.get(Calendar.WEEK_OF_MONTH) - 1);
+	 * datosMesDto.getDatosDias().add(datosDiaDto); }
+	 * 
+	 * } datos.add(datosMesDto);
+	 * 
+	 * } return datos;
+	 * 
+	 * }
+	 */
 
 	public Iterable<String> getAnyosDiferentes()
 	{
 		return getCalendarioRepository().getAnyosDiferentes();
+	}
+
+	public Iterable<DatosMesDto> getDatosAnyo(Integer anyo)
+	{
+
+		List<DatosMesDto> meses = new ArrayList<>();
+		int numeroMes = 1; // Primer mes del año
+
+		while (numeroMes <= 12)
+		{
+			Iterable<Calendario> calendarioMes = getCalendarioRepository().findByAnyoMes(anyo, numeroMes);
+
+			String nombreMes = new GregorianCalendar(anyo, numeroMes - 1, 1).getDisplayName(Calendar.MONTH,
+					Calendar.LONG, Locale.getDefault());
+			DatosMesDto mes = new DatosMesDto(numeroMes, nombreMes);
+			int numeroSemana = 1;
+
+			List<DatosDiaDto> dias = new ArrayList<>();
+			for (Calendario calendarioDia : calendarioMes)
+			{
+				GregorianCalendar diaActual = new GregorianCalendar();
+				diaActual.setTime(calendarioDia.getFecha());
+
+				int diaDelMes = diaActual.get(Calendar.DAY_OF_MONTH); // EL DIA DE LA SEMANA DOMINGO ES EL VALOR 1
+				int diaDeLaSemana = diaActual.get(Calendar.DAY_OF_WEEK); // empieza la semana en domingo
+				int semanaDelMes = numeroSemana;
+				if (diaDeLaSemana == 1)
+					numeroSemana++;
+
+				DatosDiaDto dia = new DatosDiaDto(diaDeLaSemana, semanaDelMes, diaDelMes,
+						calendarioDia.getEstado().getId(), -1);
+				dias.add(dia);
+
+			}
+			mes.setDatosDias(dias);
+			meses.add(mes);
+
+			numeroMes++;
+		}
+
+		return meses;
 	}
 
 }

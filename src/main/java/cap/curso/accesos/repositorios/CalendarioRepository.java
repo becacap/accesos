@@ -17,4 +17,7 @@ public interface CalendarioRepository extends CrudRepository<Calendario, Integer
 	@Query(value = "select distinct extract(YEAR from c.fecha) as anyo from calendarios c", nativeQuery = true)
 	public Iterable<String> getAnyosDiferentes();
 
+	@Query(value = "select * from calendarios c where extract(YEAR from c.fecha) = :anyo and extract(MONTH from c.fecha) = :mes order by c.fecha", nativeQuery = true)
+	public Iterable<Calendario> findByAnyoMes(@Param("anyo") Integer anyo, @Param("mes") Integer mes);
+
 }

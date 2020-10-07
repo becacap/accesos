@@ -9,6 +9,12 @@ public class DatosMesDto
 	private String nombreMes;
 	private List<DatosDiaDto> datosDias;
 
+	public DatosMesDto(int mes, String nombreMes)
+	{
+		this.mes = mes;
+		this.nombreMes = nombreMes;
+	}
+
 	public int getMes()
 	{
 		return mes;

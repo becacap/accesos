@@ -1,7 +1,6 @@
 package cap.curso.accesos.controladores;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -96,13 +95,14 @@ public class CalendarioRestController
 	}
 
 	@GetMapping("/{year}/datos")
-	public List<DatosMesDto> getDatosYear(@PathVariable("year") int year)
+	public Iterable<DatosMesDto> getDatosYear(@PathVariable("year") int year)
 	{
-		return getCalendarioService().getDatosYear(year);
+		return getCalendarioService().getDatosAnyo(year);
 	}
-	
+
 	@GetMapping("/anyos")
-	public Iterable<String> getAnyosDiferentes(){
+	public Iterable<String> getAnyosDiferentes()
+	{
 		return getCalendarioService().getAnyosDiferentes();
 	}
 

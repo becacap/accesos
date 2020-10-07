@@ -1,7 +1,5 @@
 package cap.curso.accesos.servicios;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import cap.curso.accesos.DTOs.DatosMesDto;
@@ -30,7 +28,7 @@ public interface CalendarioServiceInterface
 
 	public void deleteAll();
 
-	List<DatosMesDto> getDatosYear(int year);
+	public Iterable<DatosMesDto> getDatosAnyo(Integer anyo);
 
 	public Iterable<String> getAnyosDiferentes();
 
