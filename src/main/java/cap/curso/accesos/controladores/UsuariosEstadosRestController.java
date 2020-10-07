@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cap.curso.accesos.DTOs.RegistroDto;
 import cap.curso.accesos.entidades.UsuarioEstado;
+import cap.curso.accesos.exception.CalendarioNotFoundException;
+import cap.curso.accesos.exception.EmpleadoNotFoundException;
 import cap.curso.accesos.servicios.UsuariosEstadoServiceInterface;
 
 @RestController
@@ -60,7 +62,7 @@ public class UsuariosEstadosRestController
 
 	@GetMapping("/calendario/{empleadoId}/{anyo}")
 	public List<UsuarioEstado> getCalendarioEmpleadoByIdAndYear(@PathVariable("empleadoId") Integer idEmpleado,
-			@PathVariable("anyo") Integer anyo)
+			@PathVariable("anyo") Integer anyo) throws CalendarioNotFoundException, EmpleadoNotFoundException
 	{
 		return getUsuariosEstadosService().getCalendarioEmpleado(idEmpleado, anyo);
 	}

@@ -11,6 +11,9 @@ import cap.curso.accesos.entidades.Empleado;
 import cap.curso.accesos.entidades.Estado;
 import cap.curso.accesos.entidades.Jornada;
 import cap.curso.accesos.entidades.UsuarioEstado;
+import cap.curso.accesos.exception.CalendarioNotFoundException;
+import cap.curso.accesos.exception.EmpleadoNotFoundException;
+import cap.curso.accesos.exception.EstadoNotFoundException;
 import cap.curso.accesos.repositorios.CalendarioRepository;
 import cap.curso.accesos.repositorios.EmpleadoRepository;
 import cap.curso.accesos.repositorios.EstadosRepository;
@@ -137,16 +140,60 @@ public class UsuariosEstadoService implements UsuariosEstadoServiceInterface
 	}
 
 	public List<UsuarioEstado> getCalendarioEmpleado(Integer empleado_id, Integer year)
+			throws CalendarioNotFoundException, EmpleadoNotFoundException
 	{
-		
-		//
-		
-		
-		
-		
-		
-		
-		return getUsuariosEstadosRepository().getCalendarioEmpleado(empleado_id, year);
+
+		// Get calendar by year
+		Iterable<Calendario> calendarioAnyo = getCalendarioRepository().findByAnyo(year);
+
+		// Get empleado by id
+		Empleado empleado = getEmpleadosRepository().findById(empleado_id).orElse(null);
+
+		if (calendarioAnyo != null)
+		{
+
+			if (empleado != null)
+			{
+				// Try retrieve user calendar
+				List<UsuarioEstado> calendarioEmpleado = getUsuariosEstadosRepository()
+						.getCalendarioEmpleado(empleado_id, year);
+				
+				// 
+				if (!calendarioEmpleado.isEmpty())
+				{
+					return calendarioEmpleado;
+
+				} else
+				{
+
+					// Generate user calendar
+
+					for (Calendario calendario : calendarioAnyo)
+					{
+						UsuarioEstado usuarioEstado = new UsuarioEstado();
+						usuarioEstado.setEmpleado(empleado);
+						usuarioEstado.setEstado(calendario.getEstado());
+						usuarioEstado.setCalendario(calendario);
+						usuarioEstado.setJornada(empleado.getJornada());
+
+						getUsuariosEstadosRepository().save(usuarioEstado);
+
+					}
+
+					return getUsuariosEstadosRepository().getCalendarioEmpleado(empleado_id, year);
+
+				}
+
+			} else
+			{
+				throw new EmpleadoNotFoundException("Empleado " + empleado_id + " inexistente.");
+			}
+
+		} else
+		{
+			throw new CalendarioNotFoundException("No se ha encontrado el Calendario del año " + year);
+		}
+
 	}
 
 }

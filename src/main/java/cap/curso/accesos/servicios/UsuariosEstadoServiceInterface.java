@@ -8,6 +8,8 @@ import cap.curso.accesos.DTOs.RegistroDto;
 import cap.curso.accesos.entidades.Calendario;
 import cap.curso.accesos.entidades.Empleado;
 import cap.curso.accesos.entidades.UsuarioEstado;
+import cap.curso.accesos.exception.CalendarioNotFoundException;
+import cap.curso.accesos.exception.EmpleadoNotFoundException;
 
 @Service
 public interface UsuariosEstadoServiceInterface
@@ -25,6 +27,6 @@ public interface UsuariosEstadoServiceInterface
 
 	public UsuarioEstado getDiasTrabajadosEmpleadoByYearByMes(Empleado empleado, Calendario calendario);
 
-	public List<UsuarioEstado> getCalendarioEmpleado(Integer empleado_id, Integer year);
+	public List<UsuarioEstado> getCalendarioEmpleado(Integer empleado_id, Integer year) throws CalendarioNotFoundException, EmpleadoNotFoundException;
 
 }
