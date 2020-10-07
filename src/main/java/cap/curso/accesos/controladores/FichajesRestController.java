@@ -32,9 +32,30 @@ public class FichajesRestController
 	}
 
 	@GetMapping("/")
-	public List<Acceso> getAccesos()
+	public List<FichajesDTO> getAccesos()
 	{
-		return (List<Acceso>) getFichajesServiceInterface().findAll();
+		
+		String horaEntrada = null;
+		List<FichajesDTO> fichajesResultado = null;
+		FichajesDTO resultado = new FichajesDTO();
+		int hora =0;
+		int minuto = 0;
+		List<Acceso> accesos =  (List<Acceso>) getFichajesServiceInterface().findAll();
+		for(int i=0; i< accesos.size();i++) {
+			if(accesos.get(i).getTipo() != 1) {
+				hora = accesos.get(i).getHora();
+				minuto = accesos.get(i).getMinuto();
+			}else {
+				
+				horaEntrada = String.valueOf(hora).concat(":").concat(String.valueOf(minuto));
+				resultado.setFecha(accesos.get(i).getFecha());
+				resultado.setHoraEntrada(horaEntrada);
+				resultado.setNombre(accesos.get(i).getEmpleado().getNombre());
+				resultado.setHoraSalida(String.valueOf(accesos.get(i).getHora()).concat(":").concat(String.valueOf(accesos.get(i).getMinuto())));
+				fichajesResultado.add(resultado);
+			}
+		}
+		return fichajesResultado;
 	}
 	
 	@GetMapping("/{anyo}/{mes}")
