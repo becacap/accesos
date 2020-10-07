@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import cap.curso.accesos.DTOs.FichajesDTO;
 import cap.curso.accesos.entidades.Acceso;
 import cap.curso.accesos.entidades.Empleado;
 import cap.curso.accesos.servicios.FichajesServiceInterface;
@@ -37,8 +38,28 @@ public class FichajesRestController
 	}
 	
 	@GetMapping("/{anyo}/{mes}")
-	public List<Acceso> getAccesosByAnyoMesEmpleado(@RequestBody Empleado empleado, @PathVariable("anyo") int anyo, @PathVariable("mes") int mes)
+	public List<FichajesDTO> getAccesosByAnyoMesEmpleado(@RequestBody Empleado empleado, @PathVariable("anyo") int anyo, @PathVariable("mes") int mes)
 	{
-		return (List<Acceso>) getFichajesServiceInterface().findFichajesMes(empleado, anyo, mes);
+		String horaEntrada = null;
+		List<FichajesDTO> fichajesResultado = null;
+		FichajesDTO resultado = new FichajesDTO();
+		int hora =0;
+		int minuto = 0;
+		List<Acceso> accesos =  (List<Acceso>) getFichajesServiceInterface().findFichajesMes(empleado, anyo, mes);
+		for(int i=0; i< accesos.size();i++) {
+			if(accesos.get(i).getTipo() != 1) {
+				hora = accesos.get(i).getHora();
+				minuto = accesos.get(i).getMinuto();
+			}else {
+				
+				horaEntrada = String.valueOf(hora).concat(":").concat(String.valueOf(minuto));
+				resultado.setFecha(accesos.get(i).getFecha());
+				resultado.setHoraEntrada(horaEntrada);
+				resultado.setNombre(accesos.get(i).getEmpleado().getNombre());
+				resultado.setHoraSalida(String.valueOf(accesos.get(i).getHora()).concat(":").concat(String.valueOf(accesos.get(i).getMinuto())));
+				fichajesResultado.add(resultado);
+			}
+		}
+		return fichajesResultado;
 	}
 }
