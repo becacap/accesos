@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,8 +36,8 @@ public class FichajesRestController
 		return (List<Acceso>) getFichajesServiceInterface().findAll();
 	}
 	
-	@GetMapping("/{empleado}/{anyo}/{mes}")
-	public List<Acceso> getAccesosByAnyoMesEmpleado(@PathVariable("empleado") Empleado empleado, @PathVariable("anyo") int anyo, @PathVariable("mes") int mes)
+	@GetMapping("/{anyo}/{mes}")
+	public List<Acceso> getAccesosByAnyoMesEmpleado(@RequestBody Empleado empleado, @PathVariable("anyo") int anyo, @PathVariable("mes") int mes)
 	{
 		return (List<Acceso>) getFichajesServiceInterface().findFichajesMes(empleado, anyo, mes);
 	}
