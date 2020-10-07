@@ -138,6 +138,14 @@ public class UsuariosEstadoService implements UsuariosEstadoServiceInterface
 
 	public List<UsuarioEstado> getCalendarioEmpleado(Integer empleado_id, Integer year)
 	{
+		
+		//
+		
+		
+		
+		
+		
+		
 		return getUsuariosEstadosRepository().getCalendarioEmpleado(empleado_id, year);
 	}
 
