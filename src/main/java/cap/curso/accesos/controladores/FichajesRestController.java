@@ -1,5 +1,6 @@
 package cap.curso.accesos.controladores;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class FichajesRestController
 	{
 		
 		String horaEntrada = null;
-		List<FichajesDTO> fichajesResultado = null;
+		List<FichajesDTO> fichajesResultado = new ArrayList();
 		FichajesDTO resultado = new FichajesDTO();
 		int hora =0;
 		int minuto = 0;
@@ -62,7 +63,7 @@ public class FichajesRestController
 	public List<FichajesDTO> getAccesosByAnyoMesEmpleado(@RequestBody Empleado empleado, @PathVariable("anyo") int anyo, @PathVariable("mes") int mes)
 	{
 		String horaEntrada = null;
-		List<FichajesDTO> fichajesResultado = null;
+		List<FichajesDTO> fichajesResultado = new ArrayList();
 		FichajesDTO resultado = new FichajesDTO();
 		int hora =0;
 		int minuto = 0;
