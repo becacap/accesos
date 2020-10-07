@@ -213,4 +213,9 @@ public class CalendarioService implements CalendarioServiceInterface
 
 	}
 
+	public Iterable<String> getAnyosDiferentes()
+	{
+		return getCalendarioRepository().getAnyosDiferentes();
+	}
+
 }

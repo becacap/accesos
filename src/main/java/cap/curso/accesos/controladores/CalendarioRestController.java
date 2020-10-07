@@ -100,5 +100,10 @@ public class CalendarioRestController
 	{
 		return getCalendarioService().getDatosYear(year);
 	}
+	
+	@GetMapping("/anyos")
+	public Iterable<String> getAnyosDiferentes(){
+		return getCalendarioService().getAnyosDiferentes();
+	}
 
 }

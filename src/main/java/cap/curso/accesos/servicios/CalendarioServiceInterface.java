@@ -32,4 +32,6 @@ public interface CalendarioServiceInterface
 
 	List<DatosMesDto> getDatosYear(int year);
 
+	public Iterable<String> getAnyosDiferentes();
+
 }
