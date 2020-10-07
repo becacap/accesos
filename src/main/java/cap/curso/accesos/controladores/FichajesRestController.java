@@ -77,7 +77,7 @@ public class FichajesRestController
 				horaEntrada = String.valueOf(hora).concat(":").concat(String.valueOf(minuto));
 				resultado.setFecha(accesos.get(i).getFecha());
 				resultado.setHoraEntrada(horaEntrada);
-				resultado.setNombre(accesos.get(i).getEmpleado().getNombre());
+				resultado.setNombre(accesos.get(i).getEmpleado().getNombre().concat(accesos.get(i).getEmpleado().getApellidos()));
 				resultado.setHoraSalida(String.valueOf(accesos.get(i).getHora()).concat(":").concat(String.valueOf(accesos.get(i).getMinuto())));
 				fichajesResultado.add(resultado);
 			}
