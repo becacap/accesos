@@ -233,7 +233,7 @@ public class CalendarioService implements CalendarioServiceInterface
 					numeroSemana++;
 
 				DatosDiaDto dia = new DatosDiaDto(calendarioDia.getId(), diaDeLaSemana, semanaDelMes, diaDelMes,
-						calendarioDia.getEstado().getId(), -1, calendarioDia.getEstado().getColor());
+						calendarioDia.getEstado(), -1, calendarioDia.getEstado().getColor());
 				dias.add(dia);
 
 			}

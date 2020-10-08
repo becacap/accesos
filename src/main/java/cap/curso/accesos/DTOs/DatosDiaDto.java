@@ -1,17 +1,19 @@
 package cap.curso.accesos.DTOs;
 
+import cap.curso.accesos.entidades.Estado;
+
 public class DatosDiaDto
 {
 
 	private int diaSemana;
 	private int semanaMes;
 	private int dia;
-	private int estado;
+	private Estado estado;
 	private int jornada;
 	private int idCalendario;
 	private String colorActual;
 
-	public DatosDiaDto(int idCalendario, int diaSemana, int semanaMes, int dia, int estado, int jornada, String color)
+	public DatosDiaDto(int idCalendario, int diaSemana, int semanaMes, int dia, Estado estado, int jornada, String color)
 	{
 		this.setIdCalendario(idCalendario);
 		this.diaSemana = diaSemana;
@@ -22,12 +24,12 @@ public class DatosDiaDto
 		this.setColorActual(color);
 	}
 
-	public int getEstado()
+	public Estado getEstado()
 	{
 		return estado;
 	}
 
-	public void setEstado(int estado)
+	public void setEstado(Estado estado)
 	{
 		this.estado = estado;
 	}

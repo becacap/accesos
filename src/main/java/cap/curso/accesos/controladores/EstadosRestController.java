@@ -33,6 +33,7 @@ public class EstadosRestController
 	}
 
 	@GetMapping("/")
+	//@CrossOrigin(origins="http://localhost:4200")
 	public List<Estado> getEstados()
 	{
 		return getEstadosServiceInterface().findAll();
@@ -50,8 +51,8 @@ public class EstadosRestController
 	}
 
 	@GetMapping("/estados-calendario")
-	public Iterable<Estado> getEstadosCalendario()
-	{
+	@CrossOrigin(origins="http://localhost:4200")
+	public Iterable<Estado> getEstadosCalendario(){
 		return getEstadosServiceInterface().getEstadosCalendario();
 	}
 
