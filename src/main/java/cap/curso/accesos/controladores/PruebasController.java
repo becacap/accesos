@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cap.curso.accesos.entidades.Estado;
-import cap.curso.accesos.estado.servicios.EstadosServiceInterface;
+import cap.curso.accesos.servicios.EstadosServiceInterface;
 
 @RestController
 public class PruebasController
